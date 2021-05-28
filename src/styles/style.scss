@@ -1,0 +1,18 @@
+$main-violet: hsl(264, 100%, 61%);
+$main-magenta: hsl(293, 100%, 63%);
+$dark-bg: #333;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container {
+	background-color: $dark-bg;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: $main-violet;
+}
