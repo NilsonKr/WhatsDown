@@ -1,10 +1,15 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import Home from './containers/HomeContainer';
 
 const App = () => {
 	return (
-		<div className='container'>
-			<h1>Hello WhatsDown</h1>
-		</div>
+		<BrowserRouter>
+			<Switch>
+				<Route exact route='/' component={Home} />
+			</Switch>
+		</BrowserRouter>
 	);
 };
 

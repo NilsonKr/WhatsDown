@@ -1,0 +1,23 @@
+.home {
+	padding: 25px 0 5px;
+}
+
+.home--head {
+	padding: 0 25px;
+}
+
+.messages-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.messages-head h2 {
+	color: $dark-text;
+}
+
+.messages-head img {
+	width: 20px;
+	fill: $main-violet;
+}

@@ -1,0 +1,12 @@
+$main-violet: hsl(264, 100%, 61%);
+$main-magenta: hsl(293, 100%, 63%);
+$soft-bg: #e5e5e5;
+$white: #ffffff;
+
+$main-font: 'Source Sans Pro', sans-serif;
+$soft-text: #a4a4b2;
+$dark-text: #484860;
+
+@function get-opacity($color, $opacity) {
+	@return rgba($color, $opacity);
+}

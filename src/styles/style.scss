@@ -1,6 +1,6 @@
-$main-violet: hsl(264, 100%, 61%);
-$main-magenta: hsl(293, 100%, 63%);
-$dark-bg: #333;
+@import './_variables';
+@import './components/_Home';
+@import './components/_FilterChats';
 
 * {
 	margin: 0;
@@ -8,11 +8,7 @@ $dark-bg: #333;
 	box-sizing: border-box;
 }
 
-.container {
-	background-color: $dark-bg;
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: $main-violet;
+body {
+	background-color: $soft-bg;
+	font-family: $main-font;
 }

@@ -1,0 +1,26 @@
+.filterChats {
+	width: 100%;
+	height: 45px;
+	padding: 0 10px;
+	display: flex;
+	align-items: center;
+	background-color: get-opacity($white, 0.5);
+	border: 1px solid $white;
+	border-radius: 15px;
+}
+
+.filterChats input {
+	padding-left: 5px;
+	color: $soft-text;
+	font-family: $main-font;
+	font-weight: bold;
+	font-size: 14px;
+	background-color: transparent;
+	border: none;
+	outline: none;
+}
+
+.filterChats input::placeholder {
+	color: $soft-text;
+	font-size: 14px;
+}
