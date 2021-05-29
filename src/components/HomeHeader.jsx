@@ -4,7 +4,7 @@ import FilterChats from './FilterChats';
 
 import plusIcon from '../../assets/plusIcon.svg';
 
-const Home = () => {
+const HomeHeader = () => {
 	return (
 		<div className='home'>
 			<div className='home--head'>
@@ -18,4 +18,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default HomeHeader;

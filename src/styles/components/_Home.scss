@@ -3,7 +3,7 @@
 }
 
 .home--head {
-	padding: 0 25px;
+	padding: 0 20px;
 }
 
 .messages-head {
@@ -20,4 +20,20 @@
 .messages-head img {
 	width: 20px;
 	fill: $main-violet;
+}
+
+.Home__footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 65px;
+	padding: 5px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	background-color: get-opacity($white, 0.7);
+}
+
+.Home__footer img {
+	width: 30px;
 }
