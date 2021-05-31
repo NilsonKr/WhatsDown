@@ -1,0 +1,86 @@
+.profile__container {
+	padding-top: 5px;
+}
+.profile--back {
+	display: block;
+	width: 40px;
+	height: 40px;
+	margin-left: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $main-magenta;
+	border-radius: 50%;
+}
+
+.profile__info {
+	margin-top: 30px;
+	padding: 0px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.profile__img {
+	height: fit-content;
+	position: relative;
+	margin-right: 10px;
+}
+.profile__img img {
+	width: 85px;
+}
+.profile__img span {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	font-size: 1.5rem;
+}
+
+.profile--emojiPicker {
+	position: absolute;
+	width: 280px;
+	height: 200px;
+	bottom: 0;
+	transform: translateY(100%);
+}
+
+.profile__text h2 {
+	margin-bottom: 5px;
+	font-size: 1.5rem;
+	color: $dark-text;
+}
+
+.profile__text p {
+	color: $soft-text;
+}
+
+.profile__inputs {
+	margin-top: 40px;
+	padding: 0 20px;
+}
+
+.profile--input {
+	display: block;
+	margin-top: 15px;
+	padding: 0 0 10px;
+	border-bottom: 1px solid $soft-text;
+}
+
+.profile--input h2 {
+	font-size: 1.4rem;
+	color: $dark-text;
+}
+
+.profile--input input {
+	width: 100%;
+	font-family: $main-font;
+	font-size: 1.2rem;
+	color: $soft-text;
+	background: none;
+	outline: none;
+	border: none;
+}
+
+.profile--input input:focus {
+	background-color: $white;
+}

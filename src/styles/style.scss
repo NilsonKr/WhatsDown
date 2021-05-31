@@ -1,8 +1,8 @@
 @import './_variables';
 @import './components/_Home';
 @import './components/_FilterChats';
-@import './components/Messages';
-
+@import './components/_Messages';
+@import './components/_Profile';
 * {
 	margin: 0;
 	padding: 0;
@@ -12,4 +12,12 @@
 body {
 	background-color: $soft-bg;
 	font-family: $main-font;
+}
+
+.goBack {
+	width: 14px;
+	height: 14px;
+	border-left: 4px solid $white;
+	border-top: 4px solid $white;
+	transform: rotate(-45deg);
 }

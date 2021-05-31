@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import profileIcon from '../../assets/profile.svg';
 
 const HomeFooter = () => {
 	return (
 		<footer className='Home__footer'>
-			<img src={profileIcon} alt='Profile' />
+			<Link to='/profile'>
+				<img src={profileIcon} alt='Profile' />
+			</Link>
 		</footer>
 	);
 };
