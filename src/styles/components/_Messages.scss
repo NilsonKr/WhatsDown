@@ -17,10 +17,19 @@
 	place-items: center;
 	gap: 10px;
 }
-
-.messages__chat img {
-	width: 40px;
+.messages__profile {
+	position: relative;
 }
+
+.messages__profile img {
+	width: 45px;
+}
+.messages--status {
+	position: absolute;
+	bottom: 0;
+	right: 0px;
+}
+
 .messages__chat--info {
 	justify-self: start;
 }
