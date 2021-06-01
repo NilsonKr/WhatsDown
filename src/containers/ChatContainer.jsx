@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import ChatInput from '../components/ChatInput';
+
 import userIcon from '../../assets/user.svg';
 
 const ChatContainer = () => {
@@ -23,7 +25,7 @@ const ChatContainer = () => {
 					<span className='chat--msg--date'>09:07 PM</span>
 				</div>
 			</div>
-			<div className='chat__input'></div>
+			<ChatInput />
 		</section>
 	);
 };

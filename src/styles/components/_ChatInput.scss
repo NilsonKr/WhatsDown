@@ -1,0 +1,29 @@
+.chat__input {
+	width: 100%;
+	height: 100%;
+	padding: 5px 10px;
+	display: flex;
+	align-items: center;
+	background-color: $soft-bg;
+}
+
+.chat__input img {
+	width: 30px;
+	margin: 0 7px;
+}
+
+.chat__input input {
+	width: 100%;
+	padding: 10px;
+	font-size: 1.1rem;
+	color: $soft-bg;
+	background-color: $soft-text;
+	border-radius: 20px;
+	border: none;
+	outline: none;
+	overflow-x: unset;
+}
+
+.chat__input input::placeholder {
+	color: $soft-bg;
+}
