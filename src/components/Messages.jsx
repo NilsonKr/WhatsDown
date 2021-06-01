@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import userImg from '../../assets/user.svg';
 
 const Messages = () => {
 	return (
 		<section className='messages__container'>
-			<div className='messages__chat'>
+			<Link to='/chat' className='messages__chat'>
 				<div className='messages__profile'>
 					<img src={userImg} alt='' />
 					<span className='messages--status'>🦄</span>
@@ -15,8 +16,8 @@ const Messages = () => {
 					<p>Hello world Whatsdown!!..</p>
 				</div>
 				<p className='messages__chat--date'>08:05</p>
-			</div>
-			<div className='messages__chat not-seen'>
+			</Link>
+			<Link to='/chat' className='messages__chat not-seen'>
 				<div className='messages__profile'>
 					<img src={userImg} alt='' />
 					<span className='messages--status'>🐧</span>
@@ -28,7 +29,7 @@ const Messages = () => {
 					<p>So whatever stuff</p>
 				</div>
 				<p className='messages__chat--date'>08:05</p>
-			</div>
+			</Link>
 		</section>
 	);
 };

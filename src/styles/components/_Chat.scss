@@ -1,0 +1,86 @@
+.chat__container {
+	width: 100%;
+	height: 100vh;
+	display: grid;
+	grid-template-rows: 85px 1fr 70px;
+	background: url('../../assets/ChatBg2.jpg') center / cover no-repeat;
+}
+.chat__header {
+	width: 100%;
+	height: 90%;
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	background: rgb(136, 56, 255);
+	background: linear-gradient(
+		140deg,
+		rgba(136, 56, 255, 1) 0%,
+		rgba(149, 57, 255, 1) 48%,
+		rgba(233, 66, 255, 1) 100%
+	);
+	border-bottom-right-radius: 11px;
+	border-bottom-left-radius: 11px;
+	box-shadow: 0 2px 7px $soft-text;
+}
+
+.chat__header a {
+	margin-right: 15px;
+}
+
+.chat__header img {
+	width: 50px;
+	margin-right: 10px;
+}
+
+.chat__header h2 {
+	font-size: 1.4rem;
+	font-weight: bold;
+	color: $white;
+}
+
+.chat__main {
+	height: 100%;
+	width: 100%;
+	overflow-x: scroll;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.chat__main::-webkit-scrollbar {
+	display: none;
+}
+
+.chat--msg {
+	margin: 10px 10px 10px 10px;
+	padding: 6px;
+	background-color: $soft-violet;
+	border-radius: 7px;
+	border-bottom-right-radius: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.chat--msg p {
+	color: $dark-text;
+	font-size: 0.9rem;
+}
+
+.chat--msg span {
+	margin-top: 5px;
+	font-size: 0.8rem;
+	color: $soft-text;
+	align-self: flex-end;
+}
+
+.incoming {
+	align-self: flex-start;
+	background-color: whitesmoke;
+	border-bottom-right-radius: 7px;
+	border-bottom-left-radius: 0;
+}
+
+.chat__input {
+	width: 100%;
+	height: 100%;
+}
