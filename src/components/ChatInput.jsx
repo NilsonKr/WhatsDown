@@ -14,7 +14,11 @@ const ChatInput = ({ showEmojis, setEmojis }) => {
 		<div className='chat__input' onClick={ev => ev.stopPropagation()}>
 			{showEmojis && (
 				<div className='chat--emojis'>
-					<Picker set='apple' onSelect={ev => setMessage(message + ev.native)} />
+					<Picker
+						set='apple'
+						onSelect={ev => setMessage(message + ev.native)}
+						style={{ width: '100%' }}
+					/>
 				</div>
 			)}
 			<img src={EmojiPlaceHolder} alt='Emojis' onClick={() => setEmojis(!showEmojis)} />

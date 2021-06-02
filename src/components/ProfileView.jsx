@@ -4,17 +4,6 @@ import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 import ProfileIcon from '../../assets/user.svg';
 
-const EmojiPickerStyles = {
-	position: 'absolute',
-	bottom: '0',
-	left: '0',
-	transform: 'translateY(100%)',
-	width: '250px',
-	height: '250px',
-	overflow: 'hidden',
-	zIndex: '10',
-};
-
 const ProfileView = ({ openPicker, setPicker }) => {
 	const [emoji, setEmoji] = useState('');
 
@@ -26,16 +15,17 @@ const ProfileView = ({ openPicker, setPicker }) => {
 					<span id='emojiStatus' onClick={() => setPicker(!openPicker)}>
 						{emoji || '😶'}
 					</span>
-					<div id='EmojiPicker' onClick={ev => ev.stopPropagation()}>
-						{openPicker ? (
+					<div
+						id='EmojiPicker'
+						className='profile--emojiPicker'
+						onClick={ev => ev.stopPropagation()}
+					>
+						{openPicker && (
 							<Picker
-								className='emoji--picker'
 								set='apple'
 								onSelect={emoji => setEmoji(emoji.native)}
-								style={EmojiPickerStyles}
+								style={{ width: '100%', height: '100%' }}
 							/>
-						) : (
-							''
 						)}
 					</div>
 				</div>
