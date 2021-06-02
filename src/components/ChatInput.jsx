@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import setResize from '../utils/setResize';
 
 import EmojiPlaceHolder from '../../assets/emojiPlaceHolder.svg';
 import ImgPlaceHolder from '../../assets/imgPlaceHolder.svg';
-
-// TO-DO : Resizable Input
+import SendIcon from '../../assets/right-arrow.svg';
 
 const ChatInput = () => {
 	const [message, setMessage] = useState('');
@@ -12,12 +12,16 @@ const ChatInput = () => {
 		<div className='chat__input'>
 			<img src={EmojiPlaceHolder} alt='Emojis' />
 			<img src={ImgPlaceHolder} alt='Upload Multimedia' />
-			<input
+			<textarea
 				type='text'
 				value={message}
-				onChange={e => setMessage(e.target.value)}
+				onChange={ev => {
+					setResize(ev, '40px');
+					setMessage(ev.target.value);
+				}}
 				placeholder='Type a message...'
 			/>
+			<img src={SendIcon} alt='Send Message' />
 		</div>
 	);
 };
