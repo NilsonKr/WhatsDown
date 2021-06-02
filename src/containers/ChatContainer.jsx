@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import ChatInput from '../components/ChatInput';
@@ -6,8 +6,10 @@ import ChatInput from '../components/ChatInput';
 import userIcon from '../../assets/user.svg';
 
 const ChatContainer = () => {
+	const [showEmojis, setEmojis] = useState(false);
+
 	return (
-		<section className='chat__container'>
+		<section className='chat__container' onClick={() => setEmojis(false)}>
 			<div className='chat__header'>
 				<Link to='/'>
 					<div className='goBack'></div>
@@ -25,7 +27,7 @@ const ChatContainer = () => {
 					<span className='chat--msg--date'>09:07 PM</span>
 				</div>
 			</div>
-			<ChatInput />
+			<ChatInput showEmojis={showEmojis} setEmojis={setEmojis} />
 		</section>
 	);
 };

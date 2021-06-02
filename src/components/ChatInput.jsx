@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import setResize from '../utils/setResize';
 
+import { Picker } from 'emoji-mart';
+
 import EmojiPlaceHolder from '../../assets/emojiPlaceHolder.svg';
 import ImgPlaceHolder from '../../assets/imgPlaceHolder.svg';
 import SendIcon from '../../assets/right-arrow.svg';
 
-const ChatInput = () => {
+const ChatInput = ({ showEmojis, setEmojis }) => {
 	const [message, setMessage] = useState('');
 
 	return (
-		<div className='chat__input'>
-			<img src={EmojiPlaceHolder} alt='Emojis' />
+		<div className='chat__input' onClick={ev => ev.stopPropagation()}>
+			{showEmojis && (
+				<div className='chat--emojis'>
+					<Picker set='apple' onSelect={ev => setMessage(message + ev.native)} />
+				</div>
+			)}
+			<img src={EmojiPlaceHolder} alt='Emojis' onClick={() => setEmojis(!showEmojis)} />
 			<img src={ImgPlaceHolder} alt='Upload Multimedia' />
 			<textarea
 				type='text'
