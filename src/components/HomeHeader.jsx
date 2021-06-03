@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import FilterChats from './FilterChats';
 
@@ -11,7 +12,9 @@ const HomeHeader = () => {
 				<FilterChats />
 				<div className='messages-head'>
 					<h2>Messages</h2>
-					<img src={plusIcon} alt='' />
+					<Link to='/find'>
+						<img src={plusIcon} alt='' />
+					</Link>
 				</div>
 			</div>
 		</div>

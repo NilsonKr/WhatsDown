@@ -46,7 +46,8 @@
 }
 .messages__chat--date {
 	color: $soft-text;
-	font-size: 18px;
+	text-align: end;
+	font-size: 15px;
 }
 
 .not-seen {
@@ -55,7 +56,7 @@
 	background-color: get-opacity($white, 0.5);
 }
 
-.chat--notifaction {
+.chat--notification {
 	display: inline-block;
 	margin-left: 5px;
 	width: 15px;
