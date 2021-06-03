@@ -9,6 +9,15 @@ $main-font: 'Source Sans Pro', sans-serif;
 $soft-text: #a4a4b2;
 $dark-text: #484860;
 
+%back {
+	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background-color: $main-magenta;
+}
+
 @function get-opacity($color, $opacity) {
 	@return rgba($color, $opacity);
 }

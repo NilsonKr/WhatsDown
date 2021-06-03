@@ -1,0 +1,10 @@
+.find__header {
+	padding: 5px 20px 0 20px;
+}
+
+.find__header a {
+	@extend %back;
+	width: 35px;
+	height: 35px;
+	margin-bottom: 10px;
+}

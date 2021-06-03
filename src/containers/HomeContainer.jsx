@@ -8,7 +8,7 @@ const HomeContainer = () => {
 	return (
 		<>
 			<HomeHeader />
-			<section className='messages__container'>
+			<section className='chatsThumbnail__container'>
 				<ChatThumbnail name='Nilson' info='Hey Whatssupp!' date='09:43 PM' emoji='🦄' />
 				<ChatThumbnail
 					name='Minari'

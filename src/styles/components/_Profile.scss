@@ -3,15 +3,10 @@
 	padding-top: 5px;
 }
 .profile--back {
-	display: block;
+	@extend %back;
 	width: 40px;
 	height: 40px;
 	margin-left: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: $main-magenta;
-	border-radius: 50%;
 }
 
 .profile__info {
