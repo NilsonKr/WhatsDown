@@ -21,6 +21,21 @@ const LogInContainer = () => {
 						<h3>Or Login Using Email</h3>
 					</div>
 				</div>
+				<form className='login__form'>
+					<label className='login__form--input'>
+						EMAIL
+						<input type='email' placeholder='user@example.com' />
+					</label>
+					<label className='login__form--input'>
+						PASSWORD
+						<input type='password' />
+					</label>
+				</form>
+				<p className='forgot--password'>Forgot Password ?</p>
+				<button className='login--enter'>Log In</button>
+				<p className='login--newUser'>
+					New to WhatsDown ? <span>Sign Up</span>
+				</p>
 			</div>
 			<footer className='login__footer'>
 				<img src={footerBg} alt='Login Footer' />

@@ -11,15 +11,16 @@
 
 .login__header h2 {
 	font-size: 2.2rem;
-	font-size: $dark-text;
+	color: $dark-text;
 }
 
 .login__body {
 	width: 100%;
 	min-height: 60vh;
+	margin-top: 20px;
 	display: flex;
 	flex-flow: column;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	align-items: center;
 }
 
@@ -29,6 +30,7 @@
 	display: flex;
 	justify-content: center;
 	border-radius: 5px;
+	color: $dark-text;
 	background-color: $white;
 	box-shadow: 0 3px 25px get-opacity($soft-text, 0.4);
 }
@@ -63,6 +65,63 @@
 
 .text-separator h3 {
 	color: $soft-text;
+}
+
+.login__form {
+	width: 100%;
+}
+
+.login__form--input {
+	display: block;
+	font-size: 0.8rem;
+	font-weight: bold;
+	color: $soft-text;
+	margin-top: 25px;
+}
+
+.login__form--input input {
+	width: 100%;
+	padding: 15px;
+	font-size: 1.1rem;
+	color: $dark-text;
+	border-radius: 5px;
+	border: 1px solid $soft-text;
+	background: none;
+	outline: none;
+}
+
+.login__form--input input::placeholder {
+	font-family: $main-font;
+	color: $dark-text;
+}
+
+.forgot--password {
+	align-self: flex-end;
+	color: $soft-text;
+}
+
+.login--enter {
+	display: block;
+	width: 100%;
+	padding: 20px 0;
+	text-align: center;
+	font-family: $main-font;
+	font-weight: bold;
+	font-size: 1.5rem;
+	color: $white;
+	background: $main-violet;
+	border-radius: 5px;
+	border: none;
+}
+
+.login--newUser {
+	color: $soft-text;
+}
+
+.login--newUser span {
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: $main-magenta;
 }
 
 .login__footer {
