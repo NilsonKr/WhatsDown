@@ -1,7 +1,7 @@
 import React from 'react';
 
 import googleIcon from '../../assets/googleIcon.svg';
-import headerIcon from '../../assets/headerIcon.png';
+import headerIcon from '../../assets/headerIcon.svg';
 import footerBg from '../../assets/footerBg.png';
 
 const LogInContainer = () => {
