@@ -1,24 +1,24 @@
-.login__container {
+.auth__container {
 	position: relative;
 	padding: 30px 20px 0;
 	min-height: 100vh;
 }
 
-.login__header {
+.auth__header {
 	display: flex;
 	justify-content: space-between;
 }
 
-.login__header img {
+.auth__header img {
 	width: 25px;
 }
 
-.login__header h2 {
+.auth__header h2 {
 	font-size: 2.2rem;
 	color: $dark-text;
 }
 
-.login__body {
+.auth__body {
 	width: 100%;
 	min-height: 60vh;
 	margin-top: 20px;
@@ -28,7 +28,7 @@
 	align-items: center;
 }
 
-.login__social {
+.auth__social {
 	width: 60%;
 	padding: 10px;
 	display: flex;
@@ -39,19 +39,19 @@
 	box-shadow: 0 3px 25px get-opacity($soft-text, 0.4);
 }
 
-.login__social p {
+.auth__social p {
 	font-size: 1.4rem;
 	font-weight: bold;
 }
 
-.login__separator--wrap {
+.auth__separator--wrap {
 	width: 100%;
 	position: relative;
 	display: flex;
 	justify-content: center;
 }
 
-.login__separator--wrap::after {
+.auth__separator--wrap::after {
 	content: '';
 	position: absolute;
 	right: 0;
@@ -71,11 +71,11 @@
 	color: $soft-text;
 }
 
-.login__form {
+.auth__form {
 	width: 100%;
 }
 
-.login__form--input {
+.auth__form--input {
 	display: block;
 	font-size: 0.8rem;
 	font-weight: bold;
@@ -83,7 +83,7 @@
 	margin-top: 25px;
 }
 
-.login__form--input input {
+.auth__form--input input {
 	width: 100%;
 	padding: 15px;
 	font-size: 1.1rem;
@@ -94,7 +94,7 @@
 	outline: none;
 }
 
-.login__form--input input::placeholder {
+.auth__form--input input::placeholder {
 	font-family: $main-font;
 	color: $dark-text;
 }
@@ -104,7 +104,7 @@
 	color: $soft-text;
 }
 
-.login--enter {
+.auth--enter {
 	display: block;
 	width: 100%;
 	padding: 20px 0;
@@ -118,24 +118,24 @@
 	border: none;
 }
 
-.login--newUser {
+.auth--newUser {
 	color: $soft-text;
 }
 
-.login--newUser span {
+.auth--newUser span {
 	font-size: 1.2rem;
 	font-weight: bold;
 	color: $main-magenta;
 }
 
-.login__footer {
+.auth__footer {
 	position: absolute;
 	bottom: 0;
 	right: 0;
 	left: 0;
 }
 
-.login__footer img {
+.auth__footer img {
 	width: 100%;
 	height: 135px;
 	vertical-align: middle;
