@@ -1,15 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import googleIcon from '../../assets/googleIcon.svg';
 import headerIcon from '../../assets/headerIcon.svg';
-import footerBg from '../../assets/footerBg.png';
+import footerBgLogIn from '../../assets/footerBg.png';
+import footerBgSignUp from '../../assets/footerBg2.png';
 
-const AuthView = () => {
+const AuthView = ({ view }) => {
+	const isLogin = view === 'login';
+
 	return (
 		<section className='auth__container'>
 			<header className='auth__header'>
 				<img src={headerIcon} alt='Header' />
-				<h2>Log-In</h2>
+				<h2>{isLogin ? 'Log-In' : 'Sign-Up'}</h2>
 			</header>
 			<div className='auth__body'>
 				<div className='auth__social'>
@@ -18,10 +22,16 @@ const AuthView = () => {
 				</div>
 				<div className='auth__separator--wrap'>
 					<div className='text-separator'>
-						<h3>Or Login Using Email</h3>
+						<h3>Or {isLogin ? 'Log In' : 'Sign Up'} Using Email</h3>
 					</div>
 				</div>
 				<form className='auth__form'>
+					{!isLogin && (
+						<label className='auth__form--input'>
+							FULL NAME
+							<input type='text' placeholder='Dan Abramov' />
+						</label>
+					)}
 					<label className='auth__form--input'>
 						EMAIL
 						<input type='email' placeholder='user@example.com' />
@@ -31,14 +41,23 @@ const AuthView = () => {
 						<input type='password' />
 					</label>
 				</form>
-				<p className='forgot--password'>Forgot Password ?</p>
-				<button className='auth--enter'>Log In</button>
+				{isLogin ? (
+					<p className='forgot--password'> Forgot Password ?</p>
+				) : (
+					<p className='accept--terms'>
+						I accept the <b>Terms & Conditions</b>
+					</p>
+				)}
+				<button className='auth--enter'>
+					{isLogin ? 'Log In' : 'Create an Account'}
+				</button>
 				<p className='auth--newUser'>
-					New to WhatsDown ? <span>Sign Up</span>
+					{isLogin ? 'New to WhatsDown ?' : 'Existing Member ? '}{' '}
+					{isLogin ? <Link to='/signUp'>Sign Up</Link> : <Link to='/logIn'>Sign In</Link>}
 				</p>
 			</div>
 			<footer className='auth__footer'>
-				<img src={footerBg} alt='auth Footer' />
+				<img src={isLogin ? footerBgLogIn : footerBgSignUp} alt='auth Footer' />
 			</footer>
 		</section>
 	);

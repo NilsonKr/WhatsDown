@@ -2,12 +2,12 @@ import React from 'react';
 
 import AuthView from '../components/AuthView';
 
-const LogInContainer = () => {
+const SignUpContainer = () => {
 	return (
 		<>
-			<AuthView view='login' />
+			<AuthView view='signup' />
 		</>
 	);
 };
 
-export default LogInContainer;
+export default SignUpContainer;

@@ -6,6 +6,7 @@ import Profile from './containers/ProfileContainer';
 import Chat from './containers/ChatContainer';
 import Find from './containers/FindContainer';
 import LogInContainer from './containers/LogInContainer';
+import SignUpContainer from './containers/SignUpContainer';
 
 const App = () => {
 	return (
@@ -16,6 +17,7 @@ const App = () => {
 				<Route exact path='/chat' component={Chat} />
 				<Route exact path='/find' component={Find} />
 				<Route exact path='/logIn' component={LogInContainer} />
+				<Route exact path='/signUp' component={SignUpContainer} />
 			</Switch>
 		</BrowserRouter>
 	);

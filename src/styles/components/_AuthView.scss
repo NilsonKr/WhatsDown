@@ -46,6 +46,7 @@
 
 .auth__separator--wrap {
 	width: 100%;
+	margin: 10px 0 0;
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -68,6 +69,7 @@
 }
 
 .text-separator h3 {
+	font-size: 1rem;
 	color: $soft-text;
 }
 
@@ -104,6 +106,16 @@
 	color: $soft-text;
 }
 
+.accept--terms {
+	margin: 10px 0;
+	align-self: flex-start;
+	color: $soft-text;
+}
+
+.accept--terms b {
+	color: $dark-text;
+}
+
 .auth--enter {
 	display: block;
 	width: 100%;
@@ -111,7 +123,7 @@
 	text-align: center;
 	font-family: $main-font;
 	font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	color: $white;
 	background: $main-violet;
 	border-radius: 5px;
@@ -122,7 +134,8 @@
 	color: $soft-text;
 }
 
-.auth--newUser span {
+.auth--newUser a {
+	text-decoration: none;
 	font-size: 1.2rem;
 	font-weight: bold;
 	color: $main-magenta;
