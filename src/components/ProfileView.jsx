@@ -15,19 +15,19 @@ const ProfileView = ({ openPicker, setPicker }) => {
 					<span id='emojiStatus' onClick={() => setPicker(!openPicker)}>
 						{emoji || '😶'}
 					</span>
-					<div
-						id='EmojiPicker'
-						className='profile--emojiPicker'
-						onClick={ev => ev.stopPropagation()}
-					>
-						{openPicker && (
+					{openPicker && (
+						<div
+							id='EmojiPicker'
+							className='profile--emojiPicker'
+							onClick={ev => ev.stopPropagation()}
+						>
 							<Picker
 								set='apple'
 								onSelect={emoji => setEmoji(emoji.native)}
 								style={{ width: '100%', height: '100%' }}
 							/>
-						)}
-					</div>
+						</div>
+					)}
 				</div>
 				<div className='profile__text'>
 					<h2>Nilson Diaz</h2>

@@ -18,6 +18,15 @@ $dark-text: #484860;
 	background-color: $main-magenta;
 }
 
+@mixin mainBtn {
+	display: block;
+	text-align: center;
+	font-family: $main-font;
+	font-weight: bold;
+	font-size: 1.3rem;
+	border: none;
+}
+
 @function get-opacity($color, $opacity) {
 	@return rgba($color, $opacity);
 }

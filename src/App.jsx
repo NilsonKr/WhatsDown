@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import Landing from './containers/LandingView';
 import Home from './containers/HomeContainer';
 import Profile from './containers/ProfileContainer';
 import Chat from './containers/ChatContainer';
@@ -12,6 +13,7 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
+				<Route exact path='/landing' component={Landing} />
 				<Route exact path='/' component={Home} />
 				<Route exact path='/profile' component={Profile} />
 				<Route exact path='/chat' component={Chat} />
