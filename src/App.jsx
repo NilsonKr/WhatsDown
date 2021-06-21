@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Landing from './containers/LandingView';
 import Home from './containers/HomeContainer';
@@ -11,17 +11,15 @@ import SignUpContainer from './containers/SignUpContainer';
 
 const App = () => {
 	return (
-		<BrowserRouter>
-			<Switch>
-				<Route exact path='/landing' component={Landing} />
-				<Route exact path='/' component={Home} />
-				<Route exact path='/profile' component={Profile} />
-				<Route exact path='/chat' component={Chat} />
-				<Route exact path='/find' component={Find} />
-				<Route exact path='/logIn' component={LogInContainer} />
-				<Route exact path='/signUp' component={SignUpContainer} />
-			</Switch>
-		</BrowserRouter>
+		<Switch>
+			<Route exact path='/landing' component={Landing} />
+			<Route exact path='/' component={Home} />
+			<Route exact path='/profile' component={Profile} />
+			<Route exact path='/chat' component={Chat} />
+			<Route exact path='/find' component={Find} />
+			<Route exact path='/logIn' component={LogInContainer} />
+			<Route exact path='/signUp' component={SignUpContainer} />
+		</Switch>
 	);
 };
 

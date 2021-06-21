@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('./config/index');
 const path = require('path');
+const render = require('./ssr/render');
 const app = express();
 
 if (config.env === 'development') {
@@ -14,36 +15,6 @@ if (config.env === 'development') {
 	app.use(devMiddleware(compiler, { serverSideRender: true }));
 	app.use(hotMiddleware(compiler));
 }
-
-const genHtml = () => {
-	return `
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
-        <link rel="stylesheet" href="/statics/main.css" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap"
-          rel="stylesheet"
-        />
-        <title>WhatsDown!</title>
-      </head>
-      <body>
-        <div id="app"></div>
-        <script src="/statics/main.js"></script>
-      </body>
-    </html>
-  `;
-};
-
-const render = (req, res, next) => {
-	res.send(genHtml());
-};
 
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 app.get('*', render);
