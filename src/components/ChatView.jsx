@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import userIcon from '../../assets/user.svg';
-
 const ChatView = () => {
 	return (
 		<>
@@ -10,7 +8,7 @@ const ChatView = () => {
 				<Link to='/'>
 					<div className='goBack'></div>
 				</Link>
-				<img src={userIcon} alt='User' />
+				<img src='assets/user.svg' alt='User' />
 				<h2>Minari</h2>
 			</div>
 			<div className='chat__main'>

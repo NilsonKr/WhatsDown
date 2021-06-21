@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Picker } from 'emoji-mart';
 
 import 'emoji-mart/css/emoji-mart.css';
-import ProfileIcon from '../../assets/user.svg';
 
 const ProfileView = ({ openPicker, setPicker }) => {
 	const [emoji, setEmoji] = useState('');
@@ -11,16 +10,12 @@ const ProfileView = ({ openPicker, setPicker }) => {
 		<>
 			<div className='profile__info'>
 				<div className='profile__img'>
-					<img src={ProfileIcon} alt='User' />
+					<img src='assets/user.svg' alt='User' />
 					<span id='emojiStatus' onClick={() => setPicker(!openPicker)}>
 						{emoji || '😶'}
 					</span>
 					{openPicker && (
-						<div
-							id='EmojiPicker'
-							className='profile--emojiPicker'
-							onClick={ev => ev.stopPropagation()}
-						>
+						<div id='EmojiPicker' className='profile--emojiPicker' onClick={ev => ev.stopPropagation()}>
 							<Picker
 								set='apple'
 								onSelect={emoji => setEmoji(emoji.native)}

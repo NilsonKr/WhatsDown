@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ChatView from '../../assets/LandingChat.jpg';
-
 const LandingView = () => {
 	return (
 		<section className='landing__container'>
 			<div className='bg__el bg--left'></div>
 			<div className='bg__el bg--right'></div>
 			<div className='chat__view'>
-				<img src={ChatView} alt='Chat Preview' />
+				<img src='assets/LandingChat.jpg' alt='Chat Preview' />
 			</div>
 			<div className='landing__info'>
 				<h2 className='landing--tittle'>WhatsDown</h2>

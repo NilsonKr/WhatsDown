@@ -1,23 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import googleIcon from '../../assets/googleIcon.svg';
-import headerIcon from '../../assets/headerIcon.svg';
-import footerBgLogIn from '../../assets/footerBg.png';
-import footerBgSignUp from '../../assets/footerBg2.png';
-
 const AuthView = ({ view }) => {
 	const isLogin = view === 'login';
 
 	return (
 		<section className='auth__container'>
 			<header className='auth__header'>
-				<img src={headerIcon} alt='Header' />
+				<img src='assets/headerIcon.svg' alt='Header' />
 				<h2>{isLogin ? 'Log-In' : 'Sign-Up'}</h2>
 			</header>
 			<div className='auth__body'>
 				<div className='auth__social'>
-					<img src={googleIcon} alt='Google' />
+					<img src='assets/googleIcon.svg' alt='Google' />
 					<p>oogle</p>
 				</div>
 				<div className='auth__separator--wrap'>
@@ -48,16 +43,14 @@ const AuthView = ({ view }) => {
 						I accept the <b>Terms & Conditions</b>
 					</p>
 				)}
-				<button className='auth--enter'>
-					{isLogin ? 'Log In' : 'Create an Account'}
-				</button>
+				<button className='auth--enter'>{isLogin ? 'Log In' : 'Create an Account'}</button>
 				<p className='auth--newUser'>
 					{isLogin ? 'New to WhatsDown ?' : 'Existing Member ? '}{' '}
 					{isLogin ? <Link to='/signUp'>Sign Up</Link> : <Link to='/logIn'>Sign In</Link>}
 				</p>
 			</div>
 			<footer className='auth__footer'>
-				<img src={isLogin ? footerBgLogIn : footerBgSignUp} alt='auth Footer' />
+				<img src={isLogin ? 'assets/footerBg.png' : 'assets/footerBg2.png'} alt='auth Footer' />
 			</footer>
 		</section>
 	);

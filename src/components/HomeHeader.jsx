@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 import FilterChats from './FilterChats';
 
-import plusIcon from '../../assets/plusIcon.svg';
-
 const HomeHeader = () => {
 	return (
 		<div className='home'>
@@ -13,7 +11,7 @@ const HomeHeader = () => {
 				<div className='messages-head'>
 					<h2>Messages</h2>
 					<Link to='/find'>
-						<img src={plusIcon} alt='' />
+						<img src='assets/plusIcon.svg' alt='' />
 					</Link>
 				</div>
 			</div>
