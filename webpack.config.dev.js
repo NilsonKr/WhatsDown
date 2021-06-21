@@ -1,15 +1,16 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { HotModuleReplacementPlugin } = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
   @type {import('webpack').Configuration} 
 */
 
 module.exports = {
-	entry: './src/index.js',
+	entry: ['./src/index.js', 'webpack-hot-middleware/client?path=http://localhost:8000/__webpack_hmr'],
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'index.js',
+		filename: 'statics/main.js',
 		publicPath: '/',
 	},
 	mode: 'development',
@@ -28,23 +29,15 @@ module.exports = {
 				use: ['style-loader', 'css-loader', 'sass-loader'],
 			},
 			{
-				test: /.html$/,
-				use: 'html-loader',
-			},
-			{
-				test: /.(svg|png|jpg)$/i,
+				test: /\.jpg/,
 				type: 'asset/resource',
 			},
 		],
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			template: './public/index.html',
+		new HotModuleReplacementPlugin(),
+		new MiniCssExtractPlugin({
+			filename: 'statics/main.css',
 		}),
 	],
-	devServer: {
-		contentBase: path.join(__dirname, 'dist'),
-		compress: true,
-		historyApiFallback: true,
-	},
 };
