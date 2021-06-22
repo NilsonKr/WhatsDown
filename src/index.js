@@ -5,15 +5,14 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers/combineReducers.js';
-import initialState from './initialState.js';
 
 import App from './App';
 
 import './styles/style.scss';
 
-const store = createStore(reducers, initialState, applyMiddleware(ReduxThunk));
+const store = createStore(reducers, window.__PRELOADED_STATE__, applyMiddleware(ReduxThunk));
 
-console.log(store.getState());
+delete window.__PRELOADED_STATE__;
 
 ReactDOM.hydrate(
 	<Provider store={store}>

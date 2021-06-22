@@ -4,7 +4,13 @@ import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import App from '../../src/App';
 
-const genHtml = app => {
+//Redux
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducers from '../../src/reducers/combineReducers';
+import initialState from '../../src/initialState';
+
+const genHtml = (app, preloadedState) => {
 	return `
     <!DOCTYPE html>
     <html lang="en">
@@ -24,6 +30,9 @@ const genHtml = app => {
       </head>
       <body>
         <div id="app">${app}</div>
+        <script>
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+        </script>
         <script src="/statics/main.js"></script>
       </body>
     </html>
@@ -31,13 +40,19 @@ const genHtml = app => {
 };
 
 const render = (req, res, next) => {
+	const store = createStore(reducers, initialState);
+
+	const preloadedState = store.getState();
+
 	const appHtml = ReactDOMServer.renderToString(
-		<StaticRouter location={req.url} context={{}}>
-			<App />
-		</StaticRouter>
+		<Provider store={store}>
+			<StaticRouter location={req.url} context={{}}>
+				<App />
+			</StaticRouter>
+		</Provider>
 	);
 
-	res.send(genHtml(appHtml));
+	res.send(genHtml(appHtml, preloadedState));
 };
 
 module.exports = render;

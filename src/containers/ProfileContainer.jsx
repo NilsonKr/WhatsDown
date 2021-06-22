@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import ProfileView from '../components/ProfileView';
 
-const ProfileContainer = () => {
+const ProfileContainer = props => {
+	console.log(props.user);
+
 	const [openPicker, setPicker] = useState(false);
 
 	//Handle EmojiPicker Display
@@ -27,4 +30,6 @@ const ProfileContainer = () => {
 	);
 };
 
-export default ProfileContainer;
+const mapStateToProps = ({ user }) => ({ user });
+
+export default connect(mapStateToProps, null)(ProfileContainer);

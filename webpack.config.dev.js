@@ -7,7 +7,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 */
 
 module.exports = {
-	entry: ['./src/index.js', 'webpack-hot-middleware/client?path=http://localhost:8000/__webpack_hmr'],
+	entry: [
+		'react-hot-loader/patch',
+		'./src/index.js',
+		'webpack-hot-middleware/client?path=http://localhost:8000/__webpack_hmr',
+	],
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'statics/main.js',
