@@ -5,8 +5,9 @@ import getGravatarUrl from '../utils/gravatar';
 import 'emoji-mart/css/emoji-mart.css';
 
 const ProfileView = props => {
-	const { openPicker, setPicker, user } = props;
-	const [emoji, setEmoji] = useState(user.status);
+	const { openPicker, setPicker, user, updateInfo, emoji, updateEmoji } = props;
+	//Handle Current user inputs information
+	const [info, setInfo] = useState(user);
 
 	return (
 		<>
@@ -20,7 +21,7 @@ const ProfileView = props => {
 						<div id='EmojiPicker' className='profile--emojiPicker' onClick={ev => ev.stopPropagation()}>
 							<Picker
 								set='apple'
-								onSelect={emoji => setEmoji(emoji.native)}
+								onSelect={emoji => updateEmoji(emoji.native)}
 								style={{ width: '100%', height: '100%' }}
 							/>
 						</div>
@@ -38,8 +39,9 @@ const ProfileView = props => {
 						type='text'
 						name='Name'
 						placeholder='Set your name.'
-						value={user.name}
-						onChange={ev => console.log(ev.target.value)}
+						value={info.name}
+						onChange={ev => setInfo({ ...info, name: ev.target.value })}
+						onBlur={ev => updateInfo({ name: ev.target.value })}
 					/>
 				</label>
 				<label className='profile--input'>
@@ -48,8 +50,9 @@ const ProfileView = props => {
 						type='text'
 						name='Name'
 						placeholder='Set your description.'
-						value={user.description}
-						onChange={ev => console.log(ev.target.value)}
+						value={info.description}
+						onChange={ev => setInfo({ ...info, description: ev.target.value })}
+						onBlur={ev => updateInfo({ description: ev.target.value })}
 					/>
 				</label>
 			</div>

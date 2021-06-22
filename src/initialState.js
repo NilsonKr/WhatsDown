@@ -4,7 +4,7 @@ const initialState = {
 		name: 'Nilson Diaz',
 		email: 'nuotrok444@gmail.com',
 		description: 'Fullstack Developer :3 !',
-		status: '🐱‍🏍',
+		status: '🦄',
 	},
 	chats: [],
 };
