@@ -1,8 +1,10 @@
 const initialState = {
 	user: {
 		id: 'asdasdasdasd',
-		name: 'NilsonKr',
-		email: 'Nilson@gmail.com',
+		name: 'Nilson Diaz',
+		email: 'nuotrok444@gmail.com',
+		description: 'Fullstack Developer :3 !',
+		status: '🐱‍🏍',
 	},
 	chats: [],
 };

@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import ProfileView from '../components/ProfileView';
 
 const ProfileContainer = props => {
-	console.log(props.user);
-
 	const [openPicker, setPicker] = useState(false);
 
 	//Handle EmojiPicker Display
@@ -25,7 +23,7 @@ const ProfileContainer = props => {
 			<Link to='/' className='profile--back'>
 				<div className='goBack'></div>
 			</Link>
-			<ProfileView openPicker={openPicker} setPicker={setPicker} />
+			<ProfileView openPicker={openPicker} setPicker={setPicker} user={props.user} />
 		</section>
 	);
 };

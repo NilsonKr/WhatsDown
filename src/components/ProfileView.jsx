@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Picker } from 'emoji-mart';
+import getGravatarUrl from '../utils/gravatar';
 
 import 'emoji-mart/css/emoji-mart.css';
 
-const ProfileView = ({ openPicker, setPicker }) => {
-	const [emoji, setEmoji] = useState('');
+const ProfileView = props => {
+	const { openPicker, setPicker, user } = props;
+	const [emoji, setEmoji] = useState(user.status);
 
 	return (
 		<>
 			<div className='profile__info'>
 				<div className='profile__img'>
-					<img src='assets/user.svg' alt='User' />
+					<img src={getGravatarUrl(user.email)} alt='User' />
 					<span id='emojiStatus' onClick={() => setPicker(!openPicker)}>
 						{emoji || '😶'}
 					</span>
@@ -25,8 +27,8 @@ const ProfileView = ({ openPicker, setPicker }) => {
 					)}
 				</div>
 				<div className='profile__text'>
-					<h2>Nilson Diaz</h2>
-					<p>Hey There! Happy Hacking , Enjoy The App!</p>
+					<h2>{user.name}</h2>
+					<p>{user.description}</p>
 				</div>
 			</div>
 			<div className='profile__inputs'>
@@ -36,7 +38,7 @@ const ProfileView = ({ openPicker, setPicker }) => {
 						type='text'
 						name='Name'
 						placeholder='Set your name.'
-						value='Nilson Diaz'
+						value={user.name}
 						onChange={ev => console.log(ev.target.value)}
 					/>
 				</label>
@@ -46,7 +48,7 @@ const ProfileView = ({ openPicker, setPicker }) => {
 						type='text'
 						name='Name'
 						placeholder='Set your description.'
-						value='Frontend Developer At Seoul 👨‍💻'
+						value={user.description}
 						onChange={ev => console.log(ev.target.value)}
 					/>
 				</label>
