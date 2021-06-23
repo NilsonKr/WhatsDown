@@ -36,13 +36,21 @@ const AuthView = ({ view }) => {
 						<input type='password' />
 					</label>
 				</form>
-				{isLogin ? (
-					<p className='forgot--password'> Forgot Password ?</p>
-				) : (
-					<p className='accept--terms'>
-						I accept the <b>Terms & Conditions</b>
-					</p>
-				)}
+				<div className='auth--options'>
+					{isLogin ? (
+						<>
+							<label className='rememberme'>
+								<input type='checkbox' />
+								Remember Me
+							</label>
+							<p className='forgot--password'> Forgot Password ?</p>
+						</>
+					) : (
+						<p className='accept--terms'>
+							I accept the <b>Terms & Conditions</b>
+						</p>
+					)}
+				</div>
 				<button className='auth--enter'>{isLogin ? 'Log In' : 'Create an Account'}</button>
 				<p className='auth--newUser'>
 					{isLogin ? 'New to WhatsDown ?' : 'Existing Member ? '}{' '}

@@ -101,8 +101,18 @@
 	color: $dark-text;
 }
 
+.auth--options {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.rememberme {
+	font-weight: bold;
+	color: $dark-text;
+}
+
 .forgot--password {
-	align-self: flex-end;
 	color: $soft-text;
 }
 
