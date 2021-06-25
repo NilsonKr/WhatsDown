@@ -1,3 +1,6 @@
+const config = require('../config/index');
+import axios from 'axios';
+
 //React App
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -8,7 +11,6 @@ import App from '../../src/App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from '../../src/reducers/combineReducers';
-import initialState from '../../src/initialState';
 
 const genHtml = (app, preloadedState) => {
 	return `
@@ -39,7 +41,30 @@ const genHtml = (app, preloadedState) => {
   `;
 };
 
-const render = (req, res, next) => {
+const render = async (req, res, next) => {
+	const { userId, token } = req.cookies;
+
+	const initialState = {
+		user: {
+			id: '',
+			name: '',
+			email: '',
+			description: '',
+			status: '',
+		},
+		chats: [],
+	};
+
+	if (userId) {
+		const { data: response } = await axios({
+			method: 'get',
+			url: `${config.apiUrl}/users/${userId}`,
+			headers: { Authorization: `Bearer ${token}` },
+		});
+
+		initialState.user = { ...initialState.user, ...response.data, id: userId };
+	}
+
 	const store = createStore(reducers, initialState);
 
 	const preloadedState = store.getState();

@@ -27,6 +27,7 @@ export const login = userInfo => dispatch => {
 	})
 		.then(({ data }) => {
 			document.cookie = `userId=${data.user.id}; max-age=${rememberTime}`;
+			document.location.href = '/';
 		})
 		.catch(err => console.log(err));
 };
