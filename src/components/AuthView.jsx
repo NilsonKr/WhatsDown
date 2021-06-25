@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AuthView = ({ view, submitAction, fillForm }) => {
+const AuthView = ({ view, submitAction, fillForm, rememberPick, isRemember }) => {
 	const isLogin = view === 'login';
 
 	return (
@@ -40,7 +40,7 @@ const AuthView = ({ view, submitAction, fillForm }) => {
 					{isLogin ? (
 						<>
 							<label className='rememberme'>
-								<input type='checkbox' />
+								<input type='checkbox' onChange={() => rememberPick(!isRemember)} />
 								Remember Me
 							</label>
 							<p className='forgot--password'> Forgot Password ?</p>

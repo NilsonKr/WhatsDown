@@ -11,7 +11,7 @@ require('./strategies/basicStrategy');
 
 function authRoutes(app) {
 	const router = express.Router();
-	app.use('/auth/', router);
+	app.use('/auth', router);
 
 	router.post('/login', passport.authenticate('basic', { session: false }), async (req, res, next) => {
 		if (!req.user) {
