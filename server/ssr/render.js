@@ -72,7 +72,7 @@ const render = async (req, res, next) => {
 	const appHtml = ReactDOMServer.renderToString(
 		<Provider store={store}>
 			<StaticRouter location={req.url} context={{}}>
-				<App />
+				<App isLogged={userId} />
 			</StaticRouter>
 		</Provider>
 	);

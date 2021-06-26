@@ -5,7 +5,7 @@ const ChatThumbnail = ({ img, name, info, date, emoji, notSeen }) => {
 	return (
 		<Link to='/chat' className={`chatsThumbnail__chat ${notSeen && 'not-seen'}`}>
 			<div className='chatsThumbnail__profile'>
-				<img src={img || 'assets/user.svg'} alt='' />
+				<img src={img || 'assets/user.svg'} alt='' width='45px' />
 				<span className='chatsThumbnail--status'>{emoji}</span>
 			</div>
 			<div className='chatsThumbnail__chat--info'>

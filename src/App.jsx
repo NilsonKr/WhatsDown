@@ -9,14 +9,14 @@ import Find from './containers/FindContainer';
 import LogInContainer from './containers/LogInContainer';
 import SignUpContainer from './containers/SignUpContainer';
 
-const App = () => {
+const App = ({ isLogged }) => {
 	return (
 		<Switch>
 			<Route exact path='/landing' component={Landing} />
-			<Route exact path='/' component={Home} />
-			<Route exact path='/profile' component={Profile} />
-			<Route exact path='/chat' component={Chat} />
-			<Route exact path='/find' component={Find} />
+			<Route exact path='/' component={isLogged ? Home : Landing} />
+			<Route exact path='/profile' component={isLogged ? Profile : Landing} />
+			<Route exact path='/chat' component={isLogged ? Chat : Landing} />
+			<Route exact path='/find' component={isLogged ? Find : Landing} />
 			<Route exact path='/logIn' component={LogInContainer} />
 			<Route exact path='/signUp' component={SignUpContainer} />
 		</Switch>

@@ -10,14 +10,15 @@ import App from './App';
 
 import './styles/style.scss';
 
-const store = createStore(reducers, window.__PRELOADED_STATE__, applyMiddleware(ReduxThunk));
+const preloadedState = window.__PRELOADED_STATE__;
+const store = createStore(reducers, preloadedState, applyMiddleware(ReduxThunk));
 
 delete window.__PRELOADED_STATE__;
 
 ReactDOM.hydrate(
 	<Provider store={store}>
 		<BrowserRouter>
-			<App />
+			<App isLogged={preloadedState.user.id} />
 		</BrowserRouter>
 	</Provider>,
 	document.querySelector('#app')

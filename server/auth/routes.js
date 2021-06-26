@@ -25,7 +25,7 @@ function authRoutes(app) {
 		try {
 			const { data, status } = await axios({
 				method: 'post',
-				url: `${config.apiUrl}/auth/authorizate`,
+				url: `${config.apiUrl}/auth/authorizate?remember=${remember}`,
 				headers: { Authorization: `Bearer ${token}` },
 			});
 
