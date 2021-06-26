@@ -8,7 +8,7 @@ export const signup = (userInfo, redirect) => dispatch => {
 		url: '/auth/signup',
 		data: userInfo,
 	})
-		.then(({ data }) => {
+		.then(() => {
 			document.location.href = redirect;
 		})
 		.catch(err => console.log(err));
@@ -30,4 +30,13 @@ export const login = userInfo => dispatch => {
 			document.location.href = '/';
 		})
 		.catch(err => console.log(err));
+};
+
+export const logout = () => dispatch => {
+	document.cookie = 'token=';
+	document.cookie = 'userId=';
+
+	dispatch({ type: 'LOGOUT' });
+
+	document.location.href = '/login';
 };
