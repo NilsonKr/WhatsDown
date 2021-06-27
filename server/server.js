@@ -7,6 +7,7 @@ const app = express();
 
 //Auth Routes
 const authRoutes = require('./auth/routes');
+const socialRoutes = require('./auth/socialRoutes');
 
 //Parsers
 app.use(express.json());
@@ -24,9 +25,11 @@ if (config.env === 'development') {
 	app.use(hotMiddleware(compiler));
 }
 
+authRoutes(app);
+socialRoutes(app);
+
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 app.get('*', render);
-authRoutes(app);
 
 app.listen(config.port, () => {
 	console.log(`Magic Happens at http://localhost:${config.port}`);

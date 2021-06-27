@@ -56,13 +56,17 @@ const render = async (req, res, next) => {
 	};
 
 	if (userId) {
-		const { data: response } = await axios({
-			method: 'get',
-			url: `${config.apiUrl}/users/${userId}`,
-			headers: { Authorization: `Bearer ${token}` },
-		});
+		try {
+			const { data: response } = await axios({
+				method: 'get',
+				url: `${config.apiUrl}/users/${userId}`,
+				headers: { Authorization: `Bearer ${token}` },
+			});
 
-		initialState.user = { ...initialState.user, ...response.data, id: userId };
+			initialState.user = { ...initialState.user, ...response.data, id: userId };
+		} catch (error) {
+			console.log(error.message);
+		}
 	}
 
 	const store = createStore(reducers, initialState);
