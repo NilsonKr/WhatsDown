@@ -4,6 +4,8 @@ const axios = require('axios').default;
 const boom = require('@hapi/boom');
 const config = require('../config/index');
 
+const FOUR_HOURS = '14400000';
+
 //Google Strategy
 require('./strategies/googleStrategy');
 
@@ -15,25 +17,49 @@ function socialRoutes(app) {
 	router.get('/google', passport.authenticate('google', { scope: ['profile', 'openid', 'email'] }));
 
 	//OAuth Google Callback
-	router.get('/google/callback', passport.authenticate('google', { session: false }), (req, res, next) => {
-		if (!req.user) {
-			return next(boom.unauthorized());
+	router.get(
+		'/google/callback',
+		passport.authenticate('google', { session: false }),
+		async (req, res, next) => {
+			if (!req.user) {
+				return next(boom.unauthorized());
+			}
+
+			const { token, user } = req.user;
+			const { isRemember } = req.cookies;
+
+			try {
+				const { data, status } = await axios({
+					method: 'post',
+					url: `${config.apiUrl}/auth/authorizate?remember=${isRemember}`,
+					headers: { Authorization: `Bearer ${token}` },
+				});
+
+				if (status !== 200) {
+					return next(boom.unauthorized());
+				}
+
+				//Set Cookies with authorization jwt and user_id
+				const time = isRemember === 'true' ? config.rememberTime : FOUR_HOURS;
+
+				res.cookie('token', data.token, {
+					httpOnly: config.env === 'development' ? false : true,
+					secure: config.env === 'development' ? false : true,
+					maxAge: time,
+				});
+
+				res.cookie('userId', user._id, {
+					httpOnly: config.env === 'development' ? false : true,
+					secure: config.env === 'development' ? false : true,
+					maxAge: time,
+				});
+
+				res.redirect('/landing');
+			} catch (error) {
+				next(error);
+			}
 		}
-
-		const { token, user } = req.user;
-
-		res.cookie('token', token, {
-			httpOnly: config.env === 'development' ? false : true,
-			secure: config.env === 'development' ? false : true,
-		});
-
-		res.cookie('userId', user._id, {
-			httpOnly: config.env === 'development' ? false : true,
-			secure: config.env === 'development' ? false : true,
-		});
-
-		res.redirect('/landing');
-	});
+	);
 }
 
 module.exports = socialRoutes;

@@ -29,10 +29,11 @@
 	padding: 10px;
 	display: flex;
 	justify-content: center;
+	text-decoration: none;
 	border-radius: 5px;
 	color: $dark-text;
 	background-color: $white;
-	box-shadow: 0 3px 25px get-opacity($soft-text, 0.4);
+	box-shadow: 0 3px 25px get-opacity($soft-text, 0.3);
 }
 
 .auth__social p {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AuthView = ({ view, submitAction, fillForm, rememberPick, isRemember }) => {
+const AuthView = ({ view, submitAction, googleAuth, fillForm, rememberPick, isRemember }) => {
 	const isLogin = view === 'login';
 
 	return (
@@ -11,10 +11,10 @@ const AuthView = ({ view, submitAction, fillForm, rememberPick, isRemember }) =>
 				<h2>{isLogin ? 'Log-In' : 'Sign-Up'}</h2>
 			</header>
 			<div className='auth__body'>
-				<div className='auth__social'>
+				<a href='/social/google' className='auth__social' onClick={googleAuth}>
 					<img src='assets/googleIcon.svg' alt='Google' />
 					<p>oogle</p>
-				</div>
+				</a>
 				<div className='auth__separator--wrap'>
 					<div className='text-separator'>
 						<h3>Or {isLogin ? 'Log In' : 'Sign Up'} Using Email</h3>

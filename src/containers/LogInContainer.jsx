@@ -18,6 +18,10 @@ const LogInContainer = props => {
 		props.login({ ...loginInfo, isRemember });
 	};
 
+	const authWithGoogle = () => {
+		document.cookie = `isRemember=${isRemember}; max-age=240`;
+	};
+
 	return (
 		<>
 			<AuthView
@@ -26,6 +30,7 @@ const LogInContainer = props => {
 				submitAction={handleSubmit}
 				isRemember={isRemember}
 				rememberPick={setRemember}
+				googleAuth={authWithGoogle}
 			/>
 		</>
 	);

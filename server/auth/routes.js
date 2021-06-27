@@ -33,6 +33,8 @@ function authRoutes(app) {
 				return next(boom.unauthorized());
 			}
 
+			console.log(data);
+
 			//Set token Cookie
 			const time = remember === 'true' ? config.rememberTime : FOUR_HOURS;
 
