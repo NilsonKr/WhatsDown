@@ -9,8 +9,11 @@ const ProfileContainer = props => {
 	const [openPicker, setPicker] = useState(false);
 	const [currentEmoji, setEmoji] = useState(props.user.status);
 
-	const handleUpdateInfo = info => {
-		props.updateInfo({ ...props.user, ...info });
+	const handleUpdateInfo = (info, field) => {
+		//Update only if it has changed
+		if (props.user[field] !== info[field]) {
+			props.updateInfo({ user: { ...props.user, ...info }, updated: { ...info } });
+		}
 	};
 
 	//Handle EmojiPicker Display
@@ -23,7 +26,7 @@ const ProfileContainer = props => {
 
 		//Update Emoji
 		if (currentEmoji !== props.user.status) {
-			props.updateInfo({ ...props.user, status: currentEmoji });
+			handleUpdateInfo({ status: currentEmoji }, 'status');
 		}
 		setPicker(false);
 	};

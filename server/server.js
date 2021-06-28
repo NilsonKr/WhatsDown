@@ -8,6 +8,8 @@ const app = express();
 //Auth Routes
 const authRoutes = require('./auth/routes');
 const socialRoutes = require('./auth/socialRoutes');
+//Services Routes
+const userRoutes = require('./services/userRoutes');
 
 //Parsers
 app.use(express.json());
@@ -27,6 +29,7 @@ if (config.env === 'development') {
 
 authRoutes(app);
 socialRoutes(app);
+userRoutes(app);
 
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 app.get('*', render);

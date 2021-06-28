@@ -28,8 +28,8 @@ const ProfileView = props => {
 					)}
 				</div>
 				<div className='profile__text'>
-					<h2>{user.name}</h2>
-					<p>{user.description}</p>
+					<h2>{info.name}</h2>
+					<p>{info.description}</p>
 				</div>
 			</div>
 			<div className='profile__inputs'>
@@ -41,7 +41,7 @@ const ProfileView = props => {
 						placeholder='Set your name.'
 						value={info.name}
 						onChange={ev => setInfo({ ...info, name: ev.target.value })}
-						onBlur={ev => updateInfo({ name: ev.target.value })}
+						onBlur={ev => updateInfo({ name: ev.target.value }, 'name')}
 					/>
 				</label>
 				<label className='profile--input'>
@@ -52,7 +52,7 @@ const ProfileView = props => {
 						placeholder='Set your description.'
 						value={info.description}
 						onChange={ev => setInfo({ ...info, description: ev.target.value })}
-						onBlur={ev => updateInfo({ description: ev.target.value })}
+						onBlur={ev => updateInfo({ description: ev.target.value }, 'description')}
 					/>
 				</label>
 			</div>

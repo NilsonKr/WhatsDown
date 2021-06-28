@@ -4,7 +4,7 @@ const axios = require('axios').default;
 const boom = require('@hapi/boom');
 const config = require('../config/index');
 
-const FOUR_HOURS = '14400000';
+const FOUR_HOURS = 4 * 60 * 60 * 1000;
 
 //Google Strategy
 require('./strategies/googleStrategy');
@@ -54,7 +54,7 @@ function socialRoutes(app) {
 					maxAge: time,
 				});
 
-				res.redirect('/landing');
+				res.redirect('/');
 			} catch (error) {
 				next(error);
 			}
