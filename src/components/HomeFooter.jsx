@@ -10,7 +10,7 @@ const HomeFooter = props => {
 				<img src='assets/logout.svg' alt='Log-out' width='40px' />
 			</div>
 			<Link to='/profile'>
-				<img src='assets/profile.svg' alt='Profile' />
+				<img src='assets/profile.svg' alt='Profile' width='40px' />
 			</Link>
 		</footer>
 	);

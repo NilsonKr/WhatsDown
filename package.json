@@ -43,7 +43,7 @@
 		"webpack-dev-server": "^3.11.2"
 	},
 	"scripts": {
-		"start": "nodemon server/index.js"
+		"dev": "nodemon server/index.js"
 	},
 	"repository": {
 		"type": "git",
