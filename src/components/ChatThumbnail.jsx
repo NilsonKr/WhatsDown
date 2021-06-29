@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import gravatar from '../utils/gravatar';
 
-const ChatThumbnail = ({ img, name, lastMsg, date, emoji, notSeen }) => {
+const ChatThumbnail = ({ email, name, lastMsg, date, emoji, notSeen }) => {
 	return (
 		<Link to='/chat' className={`chatsThumbnail__chat ${/*notSeen && 'not-seen'*/ ''}`}>
 			<div className='chatsThumbnail__profile'>
-				<img src={img || 'assets/user.svg'} alt='' width='45px' />
+				<img src={email ? gravatar(email) : 'assets/user.svg'} alt={name} width='45px' />
 				<span className='chatsThumbnail--status'>{emoji}</span>
 			</div>
 			<div className='chatsThumbnail__chat--info'>

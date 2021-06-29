@@ -15,13 +15,13 @@ const HomeContainer = props => {
 
 	const getTargetUser = users => {
 		//Find user target that doesnt correspond with our Logged User
-		const target = users.reduce((prev, current) => {
-			if (current.user._id !== props.user.id) {
-				return current;
+		const target = users.filter(userInfo => {
+			if (userInfo.user._id !== props.user.id) {
+				return userInfo;
 			}
 		});
 
-		return target.user;
+		return target[0].user;
 	};
 
 	return (
@@ -33,6 +33,8 @@ const HomeContainer = props => {
 
 					return (
 						<ChatThumbnail
+							key={chat._id}
+							email={userTarget.email}
 							name={userTarget.name}
 							lastMsg='Hey Whatssupp!'
 							date='09:43 PM'
@@ -40,13 +42,13 @@ const HomeContainer = props => {
 						/>
 					);
 				})}
-				<ChatThumbnail
+				{/* <ChatThumbnail
 					name='Minari'
 					lastMsg='So whatever stuff...'
 					// notSeen={true}
 					date='08:03 PM'
 					emoji='🐧'
-				/>
+				/> */}
 			</section>
 			<HomeFooter />
 		</>
