@@ -7,17 +7,39 @@ import ChatThumbnail from '../components/ChatThumbnail';
 import HomeFooter from '../components/HomeFooter';
 
 const HomeContainer = props => {
-	console.log(props);
-
 	useEffect(() => {
-		props.getChats();
+		if (props.chats.length === 0) {
+			props.getChats();
+		}
 	}, []);
+
+	const getTargetUser = users => {
+		//Find user target that doesnt correspond with our Logged User
+		const target = users.reduce((prev, current) => {
+			if (current.user._id !== props.user.id) {
+				return current;
+			}
+		});
+
+		return target.user;
+	};
 
 	return (
 		<>
 			<HomeHeader />
 			<section className='chatsThumbnail__container'>
-				<ChatThumbnail name='Nilson' lastMsg='Hey Whatssupp!' date='09:43 PM' emoji='🦄' />
+				{props.chats.map(chat => {
+					const userTarget = getTargetUser(chat.users);
+
+					return (
+						<ChatThumbnail
+							name={userTarget.name}
+							lastMsg='Hey Whatssupp!'
+							date='09:43 PM'
+							emoji={userTarget.status}
+						/>
+					);
+				})}
 				<ChatThumbnail
 					name='Minari'
 					lastMsg='So whatever stuff...'
@@ -31,7 +53,8 @@ const HomeContainer = props => {
 	);
 };
 
-const mapStateToProps = ({ chats }) => ({
+const mapStateToProps = ({ chats, user }) => ({
+	user,
 	chats,
 });
 
