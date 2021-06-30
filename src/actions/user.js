@@ -23,3 +23,11 @@ export const getFindUsers = () => dispatch => {
 		.catch(err => console.log(err));
 	//
 };
+
+export const setRelatedUsers = (chats, userId) => dispatch => {
+	const usersRelated = chats.map(chat => {
+		const externalUser = chat.users.filter(userInfo => userInfo.user._id !== userId);
+		return externalUser[0].user._id;
+	});
+	dispatch({ type: 'SET_RELATED_USERS', payload: usersRelated });
+};

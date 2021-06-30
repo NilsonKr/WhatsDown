@@ -8,6 +8,7 @@ const initialState = {
 	},
 	chats: [],
 	findUsers: [],
+	usersRelated: [],
 };
 
 module.exports = initialState;
