@@ -36,7 +36,7 @@ const HomeContainer = props => {
 							key={chat._id}
 							email={userTarget.email}
 							name={userTarget.name}
-							lastMsg='Hey Whatssupp!'
+							info='Hey Whatssupp!'
 							date='09:43 PM'
 							emoji={userTarget.status}
 						/>

@@ -8,7 +8,9 @@ import ChatThumbnail from '../components/ChatThumbnail';
 
 const FindContainer = props => {
 	useEffect(() => {
-		props.getFindUsers();
+		if (props.findUsers.length === 0) {
+			props.getFindUsers();
+		}
 	}, []);
 
 	return (
@@ -20,9 +22,17 @@ const FindContainer = props => {
 				<SearchBar />
 			</div>
 			<section className='chatsThumbnail__container'>
-				<ChatThumbnail name='Momoring' info='Love u boo' emoji='🍑' />
-				<ChatThumbnail name='Nayeonni' info='hellooo' emoji='🐰' />
-				<ChatThumbnail name='Momoring' info='Busy../' emoji='🐱‍👓' />
+				{props.findUsers.length &&
+					props.findUsers.map(user => {
+						return (
+							<ChatThumbnail
+								name={user.name}
+								info={user.description}
+								emoji={user.status}
+								email={user.email}
+							/>
+						);
+					})}
 			</section>
 		</section>
 	);

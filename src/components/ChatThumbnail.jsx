@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import gravatar from '../utils/gravatar';
 
-const ChatThumbnail = ({ email, name, lastMsg, date, emoji, notSeen }) => {
+const ChatThumbnail = ({ email, name, info, date, emoji, notSeen }) => {
 	return (
 		<Link to='/chat' className={`chatsThumbnail__chat ${/*notSeen && 'not-seen'*/ ''}`}>
 			<div className='chatsThumbnail__profile'>
@@ -14,7 +14,7 @@ const ChatThumbnail = ({ email, name, lastMsg, date, emoji, notSeen }) => {
 					{name}
 					{/* {notSeen && <span className='chat--notification'></span>} */}
 				</h2>
-				<p>{lastMsg}</p>
+				<p>{info || ''}</p>
 			</div>
 			<p className='chatsThumbnail__chat--date'>{date || ''}</p>
 		</Link>

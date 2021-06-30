@@ -17,8 +17,9 @@ export const updateInfo = info => dispatch => {
 export const getFindUsers = () => dispatch => {
 	axios
 		.get('/user')
-		.then(({ data }) => console.log(data))
+		.then(({ data }) => {
+			dispatch({ type: 'SET_FIND_USERS', payload: data });
+		})
 		.catch(err => console.log(err));
-
-	// dispatch({ type: 'SET_FIND_USERS', payload: data });
+	//
 };
