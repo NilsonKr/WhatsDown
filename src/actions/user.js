@@ -24,10 +24,14 @@ export const getFindUsers = () => dispatch => {
 	//
 };
 
-export const setRelatedUsers = (chats, userId) => dispatch => {
+export const setRelatedUsers = chats => (dispatch, getState) => {
+	const {
+		user: { id: userId },
+	} = getState();
+
 	const usersRelated = chats.map(chat => {
 		const externalUser = chat.users.filter(userInfo => userInfo.user._id !== userId);
 		return externalUser[0].user._id;
 	});
-	dispatch({ type: 'SET_RELATED_USERS', payload: usersRelated });
+	dispatch({ type: 'SET_RELATED_USERS', payload: [...usersRelated, userId] });
 };

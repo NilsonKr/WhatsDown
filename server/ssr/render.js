@@ -53,6 +53,8 @@ const render = async (req, res, next) => {
 			status: '',
 		},
 		chats: [],
+		findUsers: [],
+		usersRelated: [],
 	};
 
 	if (userId) {

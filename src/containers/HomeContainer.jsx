@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getChats } from '../actions/chats';
-import { setRelatedUsers } from '../actions/user';
 
 import HomeHeader from '../components/HomeHeader';
 import ChatThumbnail from '../components/ChatThumbnail';
@@ -15,10 +14,6 @@ const HomeContainer = props => {
 			props.getChats();
 		}
 	}, []);
-
-	if (props.chats.length > 0 && props.usersRelated.length === 0) {
-		props.setRelatedUsers(props.chats, props.user.id);
-	}
 
 	const getTargetUser = users => {
 		//Find user target that doesnt correspond with our Logged User
@@ -65,12 +60,10 @@ const HomeContainer = props => {
 const mapStateToProps = ({ chats, user, usersRelated }) => ({
 	user,
 	chats,
-	usersRelated,
 });
 
 const mapDispatchToProps = {
 	getChats,
-	setRelatedUsers,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
