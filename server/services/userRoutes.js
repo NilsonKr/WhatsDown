@@ -8,6 +8,26 @@ function userRoutes(app) {
 	const router = express.Router();
 	app.use('/user', router);
 
+	router.get('/', async (req, res, next) => {
+		const { token } = req.cookies;
+
+		try {
+			const { data: response, status } = await axios({
+				method: 'get',
+				url: `${config.apiUrl}/users`,
+				headers: { Authorization: `Bearer ${token}` },
+			});
+
+			if (status !== 200) {
+				return next(boom.unauthorized());
+			}
+
+			res.status(200).json(response.data);
+		} catch (error) {
+			next(error);
+		}
+	});
+
 	router.put('/update/', async (req, res, next) => {
 		const { token, userId } = req.cookies;
 

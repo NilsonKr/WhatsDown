@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getFindUsers } from '../actions/user';
 
 import SearchBar from '../components/FilterChats';
 import ChatThumbnail from '../components/ChatThumbnail';
 
-const FindContainer = () => {
+const FindContainer = props => {
+	useEffect(() => {
+		props.getFindUsers();
+	}, []);
+
 	return (
 		<section className='find__container'>
 			<div className='find__header'>
@@ -22,4 +28,9 @@ const FindContainer = () => {
 	);
 };
 
-export default FindContainer;
+const mapStateToProps = ({ findUsers }) => ({ findUsers });
+const mapDispatchToProps = {
+	getFindUsers,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FindContainer);

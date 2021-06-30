@@ -7,6 +7,7 @@ const initialState = {
 		status: '',
 	},
 	chats: [],
+	findUsers: [],
 };
 
 module.exports = initialState;

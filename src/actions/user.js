@@ -13,3 +13,12 @@ export const updateInfo = info => dispatch => {
 		})
 		.catch(err => console.log(err));
 };
+
+export const getFindUsers = () => dispatch => {
+	axios
+		.get('/user')
+		.then(({ data }) => console.log(data))
+		.catch(err => console.log(err));
+
+	// dispatch({ type: 'SET_FIND_USERS', payload: data });
+};
