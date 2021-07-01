@@ -62,6 +62,8 @@ const FindContainer = props => {
 							return (
 								<ChatThumbnail
 									key={user._id}
+									chatId='new'
+									id={user._id}
 									name={user.name}
 									info={user.description}
 									emoji={user.status}

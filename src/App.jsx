@@ -15,7 +15,7 @@ const App = ({ isLogged }) => {
 			<Route exact path='/landing' component={Landing} />
 			<Route exact path='/' component={isLogged ? Home : Landing} />
 			<Route exact path='/profile' component={isLogged ? Profile : Landing} />
-			<Route exact path='/chat' component={isLogged ? Chat : Landing} />
+			<Route path='/chat/:userId/:chatId' component={isLogged ? Chat : Landing} />
 			<Route exact path='/find' component={isLogged ? Find : Landing} />
 			<Route exact path='/logIn' component={LogInContainer} />
 			<Route exact path='/signUp' component={SignUpContainer} />

@@ -6,6 +6,7 @@ import { updateInfo } from '../actions/user.js';
 import ProfileView from '../components/ProfileView';
 
 const ProfileContainer = props => {
+	console.log(props);
 	const [openPicker, setPicker] = useState(false);
 	const [currentEmoji, setEmoji] = useState(props.user.status);
 

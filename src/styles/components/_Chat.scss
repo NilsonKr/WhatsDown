@@ -26,10 +26,20 @@
 .chat__header a {
 	margin-right: 15px;
 }
+.chat__header--img {
+	position: relative;
+}
 
-.chat__header img {
+.chat__header--img img {
 	width: 50px;
 	margin-right: 10px;
+	border-radius: 50%;
+}
+.chat_header--status {
+	position: absolute;
+	bottom: 0;
+	right: 5px;
+	font-size: 1.2rem;
 }
 
 .chat__header h2 {

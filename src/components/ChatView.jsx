@@ -1,15 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import gravatar from '../utils/gravatar';
 
-const ChatView = () => {
+const ChatView = ({ userInfo }) => {
+	console.log(userInfo);
 	return (
 		<>
 			<div className='chat__header'>
 				<Link to='/'>
 					<div className='goBack'></div>
 				</Link>
-				<img src='assets/user.svg' alt='User' />
-				<h2>Minari</h2>
+				<div className='chat__header--img'>
+					<img src={gravatar(userInfo.user.email)} alt='User' />
+					<span className='chat_header--status'>{userInfo.user.status}</span>
+				</div>
+				<h2>{userInfo.user.name}</h2>
 			</div>
 			<div className='chat__main'>
 				<div className='chat--msg incoming'>

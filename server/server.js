@@ -33,7 +33,7 @@ socialRoutes(app);
 userRoutes(app);
 chatsRoutes(app);
 
-app.use('/assets', express.static(path.join(__dirname, '../assets')));
+app.use('*/assets', express.static(path.join(__dirname, '../assets')));
 app.get('*', render);
 
 app.listen(config.port, () => {

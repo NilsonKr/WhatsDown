@@ -40,6 +40,8 @@ const HomeContainer = props => {
 					return (
 						<ChatThumbnail
 							key={chat._id}
+							chatId={chat._id}
+							id={userTarget._id}
 							email={userTarget.email}
 							name={userTarget.name}
 							info='Hey Whatssupp!'
