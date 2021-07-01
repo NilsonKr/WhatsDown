@@ -28,6 +28,27 @@ function userRoutes(app) {
 		}
 	});
 
+	router.get('/search', async (req, res, next) => {
+		const { token } = req.cookies;
+		const { username } = req.query;
+
+		try {
+			const { data: response, status } = await axios({
+				method: 'get',
+				url: `${config.apiUrl}/users?username=${username}`,
+				headers: { Authorization: `Bearer ${token}` },
+			});
+
+			if (status !== 200) {
+				return next(boom.unauthorized());
+			}
+
+			res.status(200).json(response.data);
+		} catch (error) {
+			next(error);
+		}
+	});
+
 	router.put('/update/', async (req, res, next) => {
 		const { token, userId } = req.cookies;
 

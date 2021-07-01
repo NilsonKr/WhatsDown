@@ -10,9 +10,8 @@ export const getChats = () => (dispatch, getState) => {
 		.get('/chats/single')
 		.then(({ data }) => {
 			const relatedUsers = getRelatedUsers(data, userId);
-
+			// //Set users who has a chat with logged user
 			dispatch({ type: 'SET_CHATS', payload: data });
-			//Set users who has a chat with logged user
 			dispatch({ type: 'SET_RELATED_USERS', payload: [...relatedUsers, userId] });
 		})
 		.catch(err => console.log(err));

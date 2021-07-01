@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import { getFindUsers } from '../actions/user';
 import { getChats } from '../actions/chats';
@@ -9,6 +10,9 @@ import SearchBar from '../components/FilterChats';
 import ChatThumbnail from '../components/ChatThumbnail';
 
 const FindContainer = props => {
+	const [users, setUsers] = useState([]);
+	const [query, setQuery] = useState('');
+
 	useEffect(() => {
 		if (props.chats.length === 0) {
 			props.getChats();
@@ -17,7 +21,29 @@ const FindContainer = props => {
 		if (props.findUsers.length === 0) {
 			props.getFindUsers();
 		}
-	}, [props.chats.length]);
+	}, []);
+
+	//Charge users State when the data have been retrieved
+	useEffect(() => {
+		setUsers(props.findUsers);
+	}, [props.findUsers.length]);
+
+	const handleSearch = search => {
+		axios
+			.get(`/user/search?username=${search}`)
+			.then(({ data }) => setUsers(data))
+			.catch(err => console.log(err));
+	};
+
+	//Handle Query Change
+	const handleChange = value => {
+		if (value) {
+			setQuery(value);
+		} else {
+			setQuery(value);
+			setUsers(props.findUsers);
+		}
+	};
 
 	return (
 		<section className='find__container'>
@@ -25,12 +51,12 @@ const FindContainer = props => {
 				<Link to='/' className='find--back '>
 					<div className='goBack'></div>
 				</Link>
-				<SearchBar />
+				<SearchBar onSubmit={handleSearch} query={query} setQuery={handleChange} />
 				<h2 className='find--title'>Recommended Users</h2>
 			</div>
 			<section className='chatsThumbnail__container'>
 				{props.usersRelated.length > 0 &&
-					props.findUsers.map(user => {
+					users.map(user => {
 						//Render only unrelated users
 						if (props.usersRelated.includes(user._id) === false) {
 							return (
