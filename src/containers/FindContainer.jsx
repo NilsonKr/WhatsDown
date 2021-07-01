@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { getFindUsers } from '../actions/user';
 import { getChats } from '../actions/chats';
-import { setRelatedUsers } from '../actions/user';
 
 import SearchBar from '../components/FilterChats';
 import ChatThumbnail from '../components/ChatThumbnail';
@@ -54,7 +53,6 @@ const mapStateToProps = ({ findUsers, usersRelated, chats }) => ({ findUsers, us
 const mapDispatchToProps = {
 	getFindUsers,
 	getChats,
-	setRelatedUsers,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindContainer);

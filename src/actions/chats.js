@@ -16,6 +16,4 @@ export const getChats = () => (dispatch, getState) => {
 			dispatch({ type: 'SET_RELATED_USERS', payload: [...relatedUsers, userId] });
 		})
 		.catch(err => console.log(err));
-
-	console.log('chats');
 };

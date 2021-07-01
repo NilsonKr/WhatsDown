@@ -1,5 +1,4 @@
 import axios from 'axios';
-import getRelatedUsers from '../utils/getRelatedUsers';
 
 export const updateInfo = info => dispatch => {
 	axios

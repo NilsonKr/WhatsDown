@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getChats } from '../actions/chats';
+import useSearch from '../hooks/useSearch';
 
 import HomeHeader from '../components/HomeHeader';
+import FilterChats from '../components/FilterChats';
 import ChatThumbnail from '../components/ChatThumbnail';
 import HomeFooter from '../components/HomeFooter';
 
 const HomeContainer = props => {
+	const [newItems, query, setQuery] = useSearch(props.chats, 'chats');
+
 	useEffect(() => {
 		if (props.chats.length === 0) {
 			props.getChats();
@@ -26,9 +30,11 @@ const HomeContainer = props => {
 
 	return (
 		<>
-			<HomeHeader />
+			<HomeHeader>
+				<FilterChats query={query} setQuery={setQuery} />
+			</HomeHeader>
 			<section className='chatsThumbnail__container'>
-				{props.chats.map(chat => {
+				{newItems.map(chat => {
 					const userTarget = getTargetUser(chat.users);
 
 					return (

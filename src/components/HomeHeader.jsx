@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 import FilterChats from './FilterChats';
 
-const HomeHeader = () => {
+const HomeHeader = props => {
 	return (
 		<div className='home'>
 			<div className='home--head'>
-				<FilterChats />
+				{props.children}
 				<div className='messages-head'>
 					<h2>Messages</h2>
 					<Link to='/find'>
