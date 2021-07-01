@@ -10,8 +10,6 @@ import SearchBar from '../components/FilterChats';
 import ChatThumbnail from '../components/ChatThumbnail';
 
 const FindContainer = props => {
-	console.log(props);
-
 	useEffect(() => {
 		if (props.chats.length === 0) {
 			props.getChats();
@@ -19,11 +17,6 @@ const FindContainer = props => {
 
 		if (props.findUsers.length === 0) {
 			props.getFindUsers();
-		}
-
-		//Set Users Related to filter other Users
-		if (props.chats.length > 0 && props.usersRelated.length === 0) {
-			props.setRelatedUsers(props.chats);
 		}
 	}, [props.chats.length]);
 
@@ -40,7 +33,7 @@ const FindContainer = props => {
 				{props.usersRelated.length > 0 &&
 					props.findUsers.map(user => {
 						//Render only unrelated users
-						if (!props.usersRelated.includes(user._id)) {
+						if (props.usersRelated.includes(user._id) === false) {
 							return (
 								<ChatThumbnail
 									key={user._id}

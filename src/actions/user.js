@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getRelatedUsers from '../utils/getRelatedUsers';
 
 export const updateInfo = info => dispatch => {
 	axios
@@ -24,14 +25,14 @@ export const getFindUsers = () => dispatch => {
 	//
 };
 
-export const setRelatedUsers = chats => (dispatch, getState) => {
-	const {
-		user: { id: userId },
-	} = getState();
+//<---DEPRECATED ACTION--->
 
-	const usersRelated = chats.map(chat => {
-		const externalUser = chat.users.filter(userInfo => userInfo.user._id !== userId);
-		return externalUser[0].user._id;
-	});
-	dispatch({ type: 'SET_RELATED_USERS', payload: [...usersRelated, userId] });
-};
+// export const setRelatedUsers = chats => (dispatch, getState) => {
+// 	const {
+// 		user: { id: userId },
+// 	} = getState();
+
+// 	const usersRelated = getRelatedUsers(chats, userId);
+
+// 	dispatch({ type: 'SET_RELATED_USERS', payload: [...usersRelated, userId] });
+// };

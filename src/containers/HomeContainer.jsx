@@ -7,8 +7,6 @@ import ChatThumbnail from '../components/ChatThumbnail';
 import HomeFooter from '../components/HomeFooter';
 
 const HomeContainer = props => {
-	console.log(props);
-
 	useEffect(() => {
 		if (props.chats.length === 0) {
 			props.getChats();
