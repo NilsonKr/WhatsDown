@@ -11,10 +11,10 @@ const ChatView = ({ userInfo }) => {
 					<div className='goBack'></div>
 				</Link>
 				<div className='chat__header--img'>
-					<img src={gravatar(userInfo.user.email)} alt='User' />
-					<span className='chat_header--status'>{userInfo.user.status}</span>
+					<img src={gravatar(userInfo.email)} alt='User' />
+					<span className='chat_header--status'>{userInfo.status || '🙂'}</span>
 				</div>
-				<h2>{userInfo.user.name}</h2>
+				<h2>{userInfo.name}</h2>
 			</div>
 			<div className='chat__main'>
 				<div className='chat--msg incoming'>

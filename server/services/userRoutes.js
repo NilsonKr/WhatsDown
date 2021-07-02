@@ -10,11 +10,12 @@ function userRoutes(app) {
 
 	router.get('/', async (req, res, next) => {
 		const { token } = req.cookies;
+		const { username } = req.query;
 
 		try {
 			const { data: response, status } = await axios({
 				method: 'get',
-				url: `${config.apiUrl}/users`,
+				url: username ? `${config.apiUrl}/users?username=${username}` : `${config.apiUrl}/users`,
 				headers: { Authorization: `Bearer ${token}` },
 			});
 
@@ -28,14 +29,14 @@ function userRoutes(app) {
 		}
 	});
 
-	router.get('/search', async (req, res, next) => {
+	router.get('/:userId', async (req, res, next) => {
 		const { token } = req.cookies;
-		const { username } = req.query;
+		const { userId } = req.params;
 
 		try {
 			const { data: response, status } = await axios({
 				method: 'get',
-				url: `${config.apiUrl}/users?username=${username}`,
+				url: `${config.apiUrl}/users/${userId}`,
 				headers: { Authorization: `Bearer ${token}` },
 			});
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import ChatView from '../components/ChatView';
 import ChatInput from '../components/ChatInput';
@@ -12,20 +13,30 @@ const ChatContainer = props => {
 	const [targetInfo, setTargetInfo] = useState(null);
 	const [showEmojis, setEmojis] = useState(false);
 
-	useEffect(() => {
-		if (chat === null) {
+	useEffect(async () => {
+		if (userId && chatId !== 'new') {
 			const findChat = props.chats.find(chat => chat._id === chatId);
 			const findTargetUser = findChat.users.find(userInfo => userInfo.user._id === userId);
 
 			setChat(findChat);
-			setTargetInfo(findTargetUser);
+			setTargetInfo(findTargetUser.user);
+		}
+
+		if (chatId === 'new') {
+			const { data: newUser } = await axios.get(`/user/${userId}`);
+
+			setTargetInfo(newUser);
 		}
 	}, []);
 
 	return (
 		<section className='chat__container' onClick={() => setEmojis(false)}>
-			{targetInfo && <ChatView userInfo={targetInfo} />}
-			<ChatInput showEmojis={showEmojis} setEmojis={setEmojis} />
+			{targetInfo && (
+				<>
+					<ChatView userInfo={targetInfo} />
+					<ChatInput showEmojis={showEmojis} setEmojis={setEmojis} />
+				</>
+			)}
 		</section>
 	);
 };

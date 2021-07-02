@@ -30,7 +30,7 @@ const FindContainer = props => {
 
 	const handleSearch = search => {
 		axios
-			.get(`/user/search?username=${search}`)
+			.get(`/user?username=${search}`)
 			.then(({ data }) => setUsers(data))
 			.catch(err => console.log(err));
 	};
