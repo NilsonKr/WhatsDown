@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers/combineReducers.js';
+import ConnectionsProvider from './context/connections';
 
 import App from './App';
 
@@ -17,9 +18,11 @@ delete window.__PRELOADED_STATE__;
 
 ReactDOM.hydrate(
 	<Provider store={store}>
-		<BrowserRouter>
-			<App isLogged={preloadedState.user.id} />
-		</BrowserRouter>
+		<ConnectionsProvider>
+			<BrowserRouter>
+				<App isLogged={preloadedState.user.id} />
+			</BrowserRouter>
+		</ConnectionsProvider>
 	</Provider>,
 	document.querySelector('#app')
 );

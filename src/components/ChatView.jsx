@@ -21,7 +21,7 @@ const ChatView = ({ userInfo, messages, loggedUser }) => {
 					const formatDate = format(new Date(msg.date), 'h:m a');
 
 					return (
-						<div className={`chat--msg ${msg.user !== loggedUser && 'incoming'}`}>
+						<div key={msg._id} className={`chat--msg ${msg.user !== loggedUser && 'incoming'}`}>
 							<p>{msg.message}</p>
 							<span className='chat--msg--date'>{formatDate}</span>
 						</div>
