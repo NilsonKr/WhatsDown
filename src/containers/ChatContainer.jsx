@@ -33,7 +33,7 @@ const ChatContainer = props => {
 		<section className='chat__container' onClick={() => setEmojis(false)}>
 			{targetInfo && (
 				<>
-					<ChatView userInfo={targetInfo} />
+					<ChatView userInfo={targetInfo} messages={chat.messages} loggedUser={props.user.id} />
 					<ChatInput showEmojis={showEmojis} setEmojis={setEmojis} />
 				</>
 			)}

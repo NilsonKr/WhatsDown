@@ -42,6 +42,10 @@ const genHtml = (app, preloadedState) => {
 };
 
 const render = async (req, res, next) => {
+	if (req.url.includes('chat')) {
+		return res.redirect('/');
+	}
+
 	const { userId, token } = req.cookies;
 
 	const initialState = {

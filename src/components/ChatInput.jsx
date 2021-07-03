@@ -14,7 +14,7 @@ const ChatInput = ({ showEmojis, setEmojis }) => {
 				</div>
 			)}
 			<img src='assets/emojiPlaceHolder.svg' alt='Emojis' onClick={() => setEmojis(!showEmojis)} />
-			<img src='assets/imgPlaceHolder.svg' alt='Upload Multimedia' />
+			{/* <img src='assets/imgPlaceHolder.svg' alt='Upload Multimedia' /> */}
 			<textarea
 				type='text'
 				value={message}

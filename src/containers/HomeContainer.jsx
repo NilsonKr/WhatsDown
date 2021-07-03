@@ -36,6 +36,7 @@ const HomeContainer = props => {
 			<section className='chatsThumbnail__container'>
 				{newItems.map(chat => {
 					const userTarget = getTargetUser(chat.users);
+					const lastMsg = chat.messages[chat.messages.length - 1];
 
 					return (
 						<ChatThumbnail
@@ -44,8 +45,8 @@ const HomeContainer = props => {
 							id={userTarget._id}
 							email={userTarget.email}
 							name={userTarget.name}
-							info='Hey Whatssupp!'
-							date='09:43 PM'
+							info={lastMsg && lastMsg.message}
+							date={lastMsg && lastMsg.date}
 							emoji={userTarget.status}
 						/>
 					);

@@ -36,6 +36,6 @@ chatsRoutes(app);
 app.use('*/assets', express.static(path.join(__dirname, '../assets')));
 app.get('*', render);
 
-app.listen(config.port, () => {
+app.listen(config.port, '0.0.0.0', () => {
 	console.log(`Magic Happens at http://localhost:${config.port}`);
 });

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import gravatar from '../utils/gravatar';
+import { format } from 'date-fns';
 
 const ChatThumbnail = ({ chatId, id, email, name, info, date, emoji, notSeen }) => {
+	const formatDate = date ? format(new Date(date), 'h:m a') : '';
+
 	return (
 		<Link to={`/chat/${id}/${chatId}`} className={`chatsThumbnail__chat ${/*notSeen && 'not-seen'*/ ''}`}>
 			<div className='chatsThumbnail__profile'>
@@ -16,7 +19,7 @@ const ChatThumbnail = ({ chatId, id, email, name, info, date, emoji, notSeen }) 
 				</h2>
 				<p>{info || ''}</p>
 			</div>
-			<p className='chatsThumbnail__chat--date'>{date || ''}</p>
+			<p className='chatsThumbnail__chat--date'>{formatDate}</p>
 		</Link>
 	);
 };
