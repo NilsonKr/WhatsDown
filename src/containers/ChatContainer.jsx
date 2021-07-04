@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Context as Connections } from '../context/connections';
 import axios from 'axios';
-import io from 'socket.io-client';
 
 import ChatView from '../components/ChatView';
 import ChatInput from '../components/ChatInput';
@@ -11,23 +9,10 @@ import ChatInput from '../components/ChatInput';
 const ChatContainer = props => {
 	const { userId, chatId } = useParams();
 
-	const { connections, setConnection } = useContext(Connections);
-
+	// const [socket, setSocket] = useState('');
 	const [chat, setChat] = useState(null);
-	const [socketIo, setSocket] = useState(null);
 	const [targetInfo, setTargetInfo] = useState(null);
 	const [showEmojis, setEmojis] = useState(false);
-
-	useEffect(() => {
-		if (!connections.has(chatId)) {
-			const newSocket = io('http://localhost:3000');
-
-			newSocket.on('message', data => console.log(data));
-
-			connections.set(chatId, newSocket);
-			setSocket(newSocket);
-		}
-	}, []);
 
 	useEffect(async () => {
 		if (userId && chatId !== 'new') {
@@ -44,8 +29,6 @@ const ChatContainer = props => {
 			setTargetInfo(newUser);
 		}
 	}, []);
-
-	console.log(connections);
 
 	return (
 		<section className='chat__container' onClick={() => setEmojis(false)}>

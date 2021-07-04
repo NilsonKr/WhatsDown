@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import App from '../../src/App';
+import ConnectionsProvider from '../../src/context/connections';
 
 //Redux
 import { createStore } from 'redux';
@@ -81,9 +82,11 @@ const render = async (req, res, next) => {
 
 	const appHtml = ReactDOMServer.renderToString(
 		<Provider store={store}>
-			<StaticRouter location={req.url} context={{}}>
-				<App isLogged={userId} />
-			</StaticRouter>
+			<ConnectionsProvider>
+				<StaticRouter location={req.url} context={{}}>
+					<App isLogged={userId} />
+				</StaticRouter>
+			</ConnectionsProvider>
 		</Provider>
 	);
 

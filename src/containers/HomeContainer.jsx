@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { getChats } from '../actions/chats';
 import useSearch from '../hooks/useSearch';
+import io from 'socket.io-client';
+import { Context } from '../context/connections';
 
 import HomeHeader from '../components/HomeHeader';
 import FilterChats from '../components/FilterChats';
@@ -10,6 +12,20 @@ import HomeFooter from '../components/HomeFooter';
 
 const HomeContainer = props => {
 	const [newItems, query, setQuery] = useSearch(props.chats, 'chats');
+	const { connections } = useContext(Context);
+
+	//Set Sockets Connections
+	useEffect(() => {
+		props.chats.forEach(chat => {
+			if (!connections.has(chat._id)) {
+				const newSocket = io(process.env.API_URL);
+
+				newSocket.on('message', message => console.log(message));
+
+				connections.set(chat._id, newSocket);
+			}
+		});
+	}, [props.chats]);
 
 	useEffect(() => {
 		if (props.chats.length === 0) {
