@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import setResize from '../utils/setResize';
 
 import { Picker } from 'emoji-mart';
 
-const ChatInput = ({ showEmojis, setEmojis }) => {
+const ChatInput = ({ showEmojis, setEmojis, sendMessage }) => {
 	const [message, setMessage] = useState('');
+	const msgInput = useRef(null);
 
 	return (
 		<div className='chat__input' onClick={ev => ev.stopPropagation()}>
@@ -17,6 +18,7 @@ const ChatInput = ({ showEmojis, setEmojis }) => {
 			{/* <img src='assets/imgPlaceHolder.svg' alt='Upload Multimedia' /> */}
 			<textarea
 				type='text'
+				ref={msgInput}
 				value={message}
 				onChange={ev => {
 					setResize(ev, '40px');
@@ -24,7 +26,15 @@ const ChatInput = ({ showEmojis, setEmojis }) => {
 				}}
 				placeholder='Type a message...'
 			/>
-			<img src='assets/right-arrow.svg' alt='Send Message' />
+			<img
+				src='assets/right-arrow.svg'
+				alt='Send Message'
+				onClick={ev => {
+					msgInput.current.style.height = '40px';
+					msgInput.current.value = '';
+					sendMessage(message);
+				}}
+			/>
 		</div>
 	);
 };
