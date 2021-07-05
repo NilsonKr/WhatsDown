@@ -6,7 +6,7 @@ function useSearch(items, target) {
 
 	useEffect(() => {
 		setNewItems(items);
-	}, [items.length]);
+	}, [items]);
 
 	//Filter chars by User Name in the query
 	if (target === 'chats') {

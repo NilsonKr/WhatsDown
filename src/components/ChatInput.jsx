@@ -31,7 +31,7 @@ const ChatInput = ({ showEmojis, setEmojis, sendMessage }) => {
 				alt='Send Message'
 				onClick={ev => {
 					msgInput.current.style.height = '40px';
-					msgInput.current.value = '';
+					setMessage('');
 					sendMessage(message);
 				}}
 			/>

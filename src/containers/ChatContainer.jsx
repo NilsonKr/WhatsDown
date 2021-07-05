@@ -31,11 +31,11 @@ const ChatContainer = props => {
 
 			setTargetInfo(newUser);
 		}
-	}, []);
+	}, [props.chats]);
 
 	//Send Messsage Through Sockets
 	const sendMessage = message => {
-		socket.emit('private', { message: message, chatId: chatId });
+		socket.emit('private', { message: message, chat: chatId, date: new Date(), user: props.user.id });
 	};
 
 	return (

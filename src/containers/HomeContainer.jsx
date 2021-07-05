@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
-import { getChats } from '../actions/chats';
+import { getChats, updateMessage } from '../actions/chats';
 import useSearch from '../hooks/useSearch';
 import io from 'socket.io-client';
 import { Context } from '../context/connections';
@@ -22,7 +22,9 @@ const HomeContainer = props => {
 
 				newSocket.on('message', message => console.log(message));
 				newSocket.emit('join chat', chat._id);
-				newSocket.on('chatmsg', msg => console.log(msg));
+				newSocket.on('chatmsg', msg => {
+					props.updateMessage(chat._id, msg);
+				});
 
 				connections.set(chat._id, newSocket);
 			}
@@ -82,13 +84,14 @@ const HomeContainer = props => {
 	);
 };
 
-const mapStateToProps = ({ chats, user, usersRelated }) => ({
+const mapStateToProps = ({ chats, user }) => ({
 	user,
 	chats,
 });
 
 const mapDispatchToProps = {
 	getChats,
+	updateMessage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
