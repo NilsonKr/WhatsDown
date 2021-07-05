@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
+import { updateMessage } from '../actions/chats';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/connections';
@@ -17,6 +18,7 @@ const ChatContainer = props => {
 	const [targetInfo, setTargetInfo] = useState(null);
 	const [showEmojis, setEmojis] = useState(false);
 
+	//Setting Initial Data
 	useEffect(async () => {
 		if (userId && chatId !== 'new') {
 			const findChat = props.chats.find(chat => chat._id === chatId);
@@ -31,11 +33,20 @@ const ChatContainer = props => {
 
 			setTargetInfo(newUser);
 		}
+	}, []);
+
+	//Updating Messages at chat
+	useEffect(() => {
+		const findChat = props.chats.find(chat => chat._id === chatId);
+
+		setChat(findChat);
 	}, [props.chats]);
 
 	//Send Messsage Through Sockets
 	const sendMessage = message => {
-		socket.emit('private', { message: message, chat: chatId, date: new Date(), user: props.user.id });
+		const newMsg = { _id: Date.now(), message: message, chat: chatId, date: new Date(), user: props.user.id };
+		socket.emit('private', newMsg);
+		props.updateMessage(chatId, newMsg);
 	};
 
 	return (
@@ -55,5 +66,8 @@ const ChatContainer = props => {
 };
 
 const mapStateToProps = ({ user, chats }) => ({ user, chats });
+const mapDispatchToProps = {
+	updateMessage,
+};
 
-export default connect(mapStateToProps, null)(ChatContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);
