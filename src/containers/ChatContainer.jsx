@@ -35,7 +35,7 @@ const ChatContainer = props => {
 
 	//Send Messsage Through Sockets
 	const sendMessage = message => {
-		socket.emit('message', message);
+		socket.emit('private', { message: message, chatId: chatId });
 	};
 
 	return (

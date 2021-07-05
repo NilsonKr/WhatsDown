@@ -18,9 +18,11 @@ const HomeContainer = props => {
 	useEffect(() => {
 		props.chats.forEach(chat => {
 			if (!connections.has(chat._id)) {
-				const newSocket = io(process.env.API_URL);
+				const newSocket = io(process.env.SOCKET_URL);
 
 				newSocket.on('message', message => console.log(message));
+				newSocket.emit('join chat', chat._id);
+				newSocket.on('chatmsg', msg => console.log(msg));
 
 				connections.set(chat._id, newSocket);
 			}
