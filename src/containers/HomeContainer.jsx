@@ -12,25 +12,31 @@ import HomeFooter from '../components/HomeFooter';
 
 const HomeContainer = props => {
 	const [newItems, query, setQuery] = useSearch(props.chats, 'chats');
-	const { connections } = useContext(Context);
+	const { connections, setConnections } = useContext(Context);
 
-	//Set Sockets Connections
 	useEffect(() => {
-		props.chats.forEach(chat => {
-			if (!connections.has(chat._id)) {
-				const newSocket = io(process.env.SOCKET_URL);
+		//Set Sockets Connections if is not done yet
+		if (connections.size === 0) {
+			const currentConnections = new Map();
 
-				newSocket.on('message', message => console.log(message));
-				newSocket.emit('join chat', chat._id);
-				newSocket.on('chatmsg', msg => {
-					props.updateMessage(chat._id, msg);
-				});
+			props.chats.forEach(chat => {
+				if (!connections.has(chat._id)) {
+					const newSocket = io(process.env.SOCKET_URL);
 
-				connections.set(chat._id, newSocket);
-			}
-		});
-	}, [props.chats]);
+					newSocket.on('message', message => console.log(message));
+					newSocket.emit('join chat', chat._id);
+					newSocket.on('chatmsg', msg => {
+						props.updateMessage(chat._id, msg);
+					});
 
+					currentConnections.set(chat._id, newSocket);
+				}
+			});
+			setConnections(currentConnections);
+		}
+	}, [props.chats.length]);
+
+	//Charge chats
 	useEffect(() => {
 		if (props.chats.length === 0) {
 			props.getChats();

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { Context } from './context/connections';
 
 import Landing from './containers/LandingView';
 import Home from './containers/HomeContainer';
@@ -10,6 +11,18 @@ import LogInContainer from './containers/LogInContainer';
 import SignUpContainer from './containers/SignUpContainer';
 
 const App = ({ isLogged }) => {
+	const { connections } = useContext(Context);
+
+	useEffect(() => {
+		return () => {
+			for (const chatId of connections.keys()) {
+				const socket = connections.get(chatId);
+
+				socket.disconnect();
+			}
+		};
+	}, []);
+
 	return (
 		<Switch>
 			<Route exact path='/landing' component={Landing} />
