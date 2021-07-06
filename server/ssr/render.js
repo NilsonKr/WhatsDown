@@ -32,7 +32,8 @@ const genHtml = (app, preloadedState) => {
         <title>WhatsDown!</title>
       </head>
       <body>
-        <div id="app">${app}</div>
+					<div id="app">${app}</div>
+					<div id="modal"></div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>

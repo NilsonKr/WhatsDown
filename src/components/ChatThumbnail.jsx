@@ -4,7 +4,6 @@ import gravatar from '../utils/gravatar';
 import { format } from 'date-fns';
 
 const ChatThumbnail = ({ chatId, id, email, name, info, date, emoji, notSeen }) => {
-	console.log(notSeen);
 	const formatDate = date ? format(new Date(date), 'h:m a') : '';
 
 	return (

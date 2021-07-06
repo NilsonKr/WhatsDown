@@ -8,6 +8,7 @@
 @import './components/_FindPage';
 @import './components/_AuthView';
 @import './components/_Landing';
+@import './components/_StartChatModal';
 
 * {
 	margin: 0;
@@ -16,6 +17,7 @@
 }
 
 body {
+	position: relative;
 	background-color: $soft-bg;
 	font-family: $main-font;
 }

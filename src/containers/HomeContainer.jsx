@@ -56,7 +56,7 @@ const HomeContainer = props => {
 	};
 
 	return (
-		<>
+		<main className='home__container'>
 			<HomeHeader>
 				<FilterChats query={query} setQuery={setQuery} />
 			</HomeHeader>
@@ -79,16 +79,9 @@ const HomeContainer = props => {
 						/>
 					);
 				})}
-				{/* <ChatThumbnail
-					name='Minari'
-					lastMsg='So whatever stuff...'
-					// notSeen={true}
-					date='08:03 PM'
-					emoji='🐧'
-				/> */}
 			</section>
 			<HomeFooter />
-		</>
+		</main>
 	);
 };
 

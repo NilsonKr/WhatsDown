@@ -7,6 +7,7 @@ import { Context } from '../context/connections';
 
 import ChatView from '../components/ChatView';
 import ChatInput from '../components/ChatInput';
+import StartChatModal from '../components/StartChatModal';
 
 const ChatContainer = props => {
 	const { userId, chatId } = useParams();
@@ -61,6 +62,7 @@ const ChatContainer = props => {
 					<ChatInput showEmojis={showEmojis} setEmojis={setEmojis} sendMessage={sendMessage} />
 				</>
 			)}
+			{chatId === 'new' && <StartChatModal name={targetInfo && targetInfo.name} />}
 		</section>
 	);
 };
