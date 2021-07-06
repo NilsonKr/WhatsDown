@@ -26,7 +26,8 @@ const HomeContainer = props => {
 					newSocket.on('message', message => console.log(message));
 					newSocket.emit('join chat', chat._id);
 					newSocket.on('chatmsg', msg => {
-						props.updateMessage(chat._id, msg);
+						//Set new Msg and visibility Status
+						props.updateMessage(chat._id, msg, 1);
 					});
 
 					currentConnections.set(chat._id, newSocket);
@@ -51,7 +52,7 @@ const HomeContainer = props => {
 			}
 		});
 
-		return target[0].user;
+		return target[0];
 	};
 
 	return (
@@ -61,7 +62,7 @@ const HomeContainer = props => {
 			</HomeHeader>
 			<section className='chatsThumbnail__container'>
 				{newItems.map(chat => {
-					const userTarget = getTargetUser(chat.users);
+					const { user: userTarget, notSeen } = getTargetUser(chat.users);
 					const lastMsg = chat.messages[chat.messages.length - 1];
 
 					return (
@@ -74,6 +75,7 @@ const HomeContainer = props => {
 							info={lastMsg && lastMsg.message}
 							date={lastMsg && lastMsg.date}
 							emoji={userTarget.status}
+							notSeen={notSeen > 0 && notSeen}
 						/>
 					);
 				})}

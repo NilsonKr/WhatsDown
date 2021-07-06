@@ -17,13 +17,26 @@ export const getChats = () => (dispatch, getState) => {
 		.catch(err => console.log(err));
 };
 
-export const updateMessage = (id, msg) => (dispatch, getState) => {
-	const { chats } = getState();
+export const updateMessage = (id, msg, notSeenMsgs) => (dispatch, getState) => {
+	const { chats, user } = getState();
 	//Inmutability & updating messages
 	const chatIndex = chats.findIndex(chat => chat._id === id);
-	const newChat = { ...chats[chatIndex], messages: [...chats[chatIndex].messages] };
+	const newChat = { ...chats[chatIndex] };
 
-	newChat.messages.push(msg);
+	if (msg) {
+		newChat.messages = [...chats[chatIndex].messages];
+		newChat.messages.push(msg);
+	}
+
+	if (notSeenMsgs) {
+		const userIndex = newChat.users.findIndex(userInfo => userInfo.user._id !== user.id);
+		const targetUser = newChat.users[userIndex];
+
+		//Set Pendents message
+		newChat.users[userIndex] = { ...targetUser, notSeen: targetUser.notSeen + notSeenMsgs };
+
+		console.log(newChat);
+	}
 
 	dispatch({ type: 'SET_CHATS_MESSAGES', payload: { newChat, index: chatIndex } });
 };
