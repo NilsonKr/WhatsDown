@@ -20,8 +20,10 @@ const ChatContainer = props => {
 	const [showEmojis, setEmojis] = useState(false);
 
 	//Setting Initial Data
-	useEffect(async () => {
+	useEffect(() => {
 		if (userId && chatId !== 'new') {
+			props.updateMessage(chatId, false, 'reset');
+
 			const findChat = props.chats.find(chat => chat._id === chatId);
 			const findTargetUser = findChat.users.find(userInfo => userInfo.user._id === userId);
 
@@ -30,10 +32,13 @@ const ChatContainer = props => {
 		}
 
 		if (chatId === 'new') {
-			const { data: newUser } = await axios.get(`/user/${userId}`);
-
-			setTargetInfo(newUser);
+			axios.get(`/user/${userId}`).then(({ data }) => setTargetInfo(data));
 		}
+
+		return function cleanup() {
+			props.updateMessage(chatId, false, 'reset');
+			//Update Database
+		};
 	}, []);
 
 	//Updating Messages at chat
@@ -59,7 +64,9 @@ const ChatContainer = props => {
 						messages={chatId !== 'new' ? chat.messages : []}
 						loggedUser={props.user.id}
 					/>
-					<ChatInput showEmojis={showEmojis} setEmojis={setEmojis} sendMessage={sendMessage} />
+					{chatId !== 'new' && (
+						<ChatInput showEmojis={showEmojis} setEmojis={setEmojis} sendMessage={sendMessage} />
+					)}
 				</>
 			)}
 			{chatId === 'new' && <StartChatModal name={targetInfo && targetInfo.name} />}

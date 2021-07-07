@@ -33,9 +33,10 @@ export const updateMessage = (id, msg, notSeenMsgs) => (dispatch, getState) => {
 		const targetUser = newChat.users[userIndex];
 
 		//Set Pendents message
-		newChat.users[userIndex] = { ...targetUser, notSeen: targetUser.notSeen + notSeenMsgs };
-
-		console.log(newChat);
+		newChat.users[userIndex] = {
+			...targetUser,
+			notSeen: notSeenMsgs === 'reset' ? 0 : targetUser.notSeen + notSeenMsgs,
+		};
 	}
 
 	dispatch({ type: 'SET_CHATS_MESSAGES', payload: { newChat, index: chatIndex } });
