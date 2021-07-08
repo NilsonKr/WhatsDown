@@ -1,5 +1,6 @@
 const config = require('../config/index');
 import axios from 'axios';
+import io from 'socket.io-client';
 
 //React App
 import React from 'react';
@@ -35,7 +36,10 @@ const genHtml = (app, preloadedState) => {
 					<div id="app">${app}</div>
 					<div id="modal"></div>
         <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+						/</g,
+						'\\u003c'
+					)}
         </script>
         <script src="/statics/main.js"></script>
       </body>

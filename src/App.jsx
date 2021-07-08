@@ -11,10 +11,14 @@ import LogInContainer from './containers/LogInContainer';
 import SignUpContainer from './containers/SignUpContainer';
 
 const App = ({ isLogged }) => {
-	const { connections } = useContext(Context);
+	const { connections, loggedSocket } = useContext(Context);
 
 	useEffect(() => {
 		return () => {
+			if (loggedSocket) {
+				loggedSocket.disconnect();
+			}
+			//Disconnect chat sockets
 			for (const chatId of connections.keys()) {
 				const socket = connections.get(chatId);
 

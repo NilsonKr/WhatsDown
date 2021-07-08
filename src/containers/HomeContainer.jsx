@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
-import { getChats, updateMessage } from '../actions/chats';
+import { getChats, updateMessage, addChat } from '../actions/chats';
 import useSearch from '../hooks/useSearch';
 import io from 'socket.io-client';
 import { Context } from '../context/connections';
@@ -12,12 +12,13 @@ import HomeFooter from '../components/HomeFooter';
 
 const HomeContainer = props => {
 	const [newItems, query, setQuery] = useSearch(props.chats, 'chats');
-	const { connections, setConnections } = useContext(Context);
+	const { connections, setConnections, setUserSocket } = useContext(Context);
+
+	console.log(connections);
 
 	useEffect(() => {
 		//Set Sockets Connections if is not done yet
-		// if (connections.size === 0) {
-		const currentConnections = new Map();
+		const currentConnections = new Map([...connections]);
 
 		props.chats.forEach(chat => {
 			if (!connections.has(chat._id)) {
@@ -34,13 +35,22 @@ const HomeContainer = props => {
 			}
 		});
 		setConnections(currentConnections);
-		// }
 	}, [props.chats.length]);
 
 	//Charge chats
 	useEffect(() => {
 		if (props.chats.length === 0) {
 			props.getChats();
+		}
+
+		if (!props.user.socket) {
+			const loggedSocket = io(process.env.SOCKET_URL);
+			// '60dac7f4965140043fb4d579'
+			loggedSocket.emit('user room', props.user.id);
+
+			loggedSocket.on('new chat client', chat => props.addChat(chat));
+
+			setUserSocket(loggedSocket);
 		}
 	}, []);
 
@@ -93,6 +103,7 @@ const mapStateToProps = ({ chats, user }) => ({
 const mapDispatchToProps = {
 	getChats,
 	updateMessage,
+	addChat,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
