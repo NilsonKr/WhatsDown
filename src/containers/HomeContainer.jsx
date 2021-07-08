@@ -14,10 +14,8 @@ const HomeContainer = props => {
 	const [newItems, query, setQuery] = useSearch(props.chats, 'chats');
 	const { connections, setConnections, setUserSocket } = useContext(Context);
 
-	console.log(connections);
-
 	useEffect(() => {
-		//Set Sockets Connections if is not done yet
+		//Set Sockets Connections if is not done yet or keep previous ones
 		const currentConnections = new Map([...connections]);
 
 		props.chats.forEach(chat => {
