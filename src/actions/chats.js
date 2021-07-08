@@ -1,6 +1,11 @@
 import axios from 'axios';
 import getRelatedUsers from '../utils/getRelatedUsers';
 
+export const addChat = newChat => ({
+	type: 'NEW_CHAT',
+	payload: { ...newChat, messages: [] },
+});
+
 export const getChats = () => (dispatch, getState) => {
 	const {
 		user: { id: userId },

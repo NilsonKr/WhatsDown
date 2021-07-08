@@ -16,25 +16,25 @@ const HomeContainer = props => {
 
 	useEffect(() => {
 		//Set Sockets Connections if is not done yet
-		if (connections.size === 0) {
-			const currentConnections = new Map();
+		// if (connections.size === 0) {
+		const currentConnections = new Map();
 
-			props.chats.forEach(chat => {
-				if (!connections.has(chat._id)) {
-					const newSocket = io(process.env.SOCKET_URL);
+		props.chats.forEach(chat => {
+			if (!connections.has(chat._id)) {
+				const newSocket = io(process.env.SOCKET_URL);
 
-					newSocket.on('message', message => console.log(message));
-					newSocket.emit('join chat', chat._id);
-					newSocket.on('chatmsg', msg => {
-						//Set new Msg and visibility Status
-						props.updateMessage(chat._id, msg, 1);
-					});
+				newSocket.on('message', message => console.log(message));
+				newSocket.emit('join chat', chat._id);
+				newSocket.on('chatmsg', msg => {
+					//Set new Msg and visibility Status
+					props.updateMessage(chat._id, msg, 1);
+				});
 
-					currentConnections.set(chat._id, newSocket);
-				}
-			});
-			setConnections(currentConnections);
-		}
+				currentConnections.set(chat._id, newSocket);
+			}
+		});
+		setConnections(currentConnections);
+		// }
 	}, [props.chats.length]);
 
 	//Charge chats

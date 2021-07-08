@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
-import { updateMessage } from '../actions/chats';
+import { updateMessage, addChat } from '../actions/chats';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/connections';
@@ -10,7 +10,7 @@ import ChatInput from '../components/ChatInput';
 import StartChatModal from '../components/StartChatModal';
 
 const ChatContainer = props => {
-	const { userId, chatId } = useParams();
+	const { userId: targeUserId, chatId } = useParams();
 
 	const { connections } = useContext(Context);
 	const socket = connections.get(chatId);
@@ -21,23 +21,28 @@ const ChatContainer = props => {
 
 	//Setting Initial Data
 	useEffect(() => {
-		if (userId && chatId !== 'new') {
+		if (targeUserId && chatId !== 'new') {
 			props.updateMessage(chatId, false, 'reset');
 
 			const findChat = props.chats.find(chat => chat._id === chatId);
-			const findTargetUser = findChat.users.find(userInfo => userInfo.user._id === userId);
+
+			const findTargetUser = findChat.users.find(
+				userInfo => userInfo.user._id === targeUserId
+			);
 
 			setChat(findChat);
 			setTargetInfo(findTargetUser.user);
 		}
 
 		if (chatId === 'new') {
-			axios.get(`/user/${userId}`).then(({ data }) => setTargetInfo(data));
+			axios.get(`/user/${targeUserId}`).then(({ data }) => setTargetInfo(data));
 		}
 
 		return function cleanup() {
-			props.updateMessage(chatId, false, 'reset');
-			//Update Database
+			if (chatId !== 'new') {
+				props.updateMessage(chatId, false, 'reset');
+				//Update Database
+			}
 		};
 	}, []);
 
@@ -50,9 +55,31 @@ const ChatContainer = props => {
 
 	//Send Messsage Through Sockets
 	const sendMessage = message => {
-		const newMsg = { _id: Date.now(), message: message, chat: chatId, date: new Date(), user: props.user.id };
+		const newMsg = {
+			_id: Date.now(),
+			message: message,
+			chat: chatId,
+			date: new Date(),
+			user: props.user.id,
+		};
 		socket.emit('private', newMsg);
 		props.updateMessage(chatId, newMsg);
+	};
+
+	//Create New chat call
+	const createNewChat = () => {
+		const newChat = [
+			{ notSeen: 0, user: props.user.id },
+			{ notSeen: 0, user: targeUserId },
+		];
+
+		axios
+			.post('/chats/create', newChat)
+			.then(({ data }) => {
+				props.addChat(data);
+				props.history.push(`/`);
+			})
+			.catch(err => console.log(err));
 	};
 
 	return (
@@ -65,11 +92,17 @@ const ChatContainer = props => {
 						loggedUser={props.user.id}
 					/>
 					{chatId !== 'new' && (
-						<ChatInput showEmojis={showEmojis} setEmojis={setEmojis} sendMessage={sendMessage} />
+						<ChatInput
+							showEmojis={showEmojis}
+							setEmojis={setEmojis}
+							sendMessage={sendMessage}
+						/>
 					)}
 				</>
 			)}
-			{chatId === 'new' && <StartChatModal name={targetInfo && targetInfo.name} />}
+			{chatId === 'new' && (
+				<StartChatModal create={createNewChat} name={targetInfo && targetInfo.name} />
+			)}
 		</section>
 	);
 };
@@ -77,6 +110,7 @@ const ChatContainer = props => {
 const mapStateToProps = ({ user, chats }) => ({ user, chats });
 const mapDispatchToProps = {
 	updateMessage,
+	addChat,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);
