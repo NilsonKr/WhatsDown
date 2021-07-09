@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { getChats, updateMessage, addChat } from '../actions/chats';
 import useSearch from '../hooks/useSearch';
+import getTargetUser from '../utils/getTargetUserChats';
 import io from 'socket.io-client';
 import { Context } from '../context/connections';
 
@@ -52,17 +53,6 @@ const HomeContainer = props => {
 		}
 	}, []);
 
-	const getTargetUser = users => {
-		//Find user target that doesnt correspond with our Logged User
-		const target = users.filter(userInfo => {
-			if (userInfo.user._id !== props.user.id) {
-				return userInfo;
-			}
-		});
-
-		return target[0];
-	};
-
 	return (
 		<main className='home__container'>
 			<HomeHeader>
@@ -70,7 +60,7 @@ const HomeContainer = props => {
 			</HomeHeader>
 			<section className='chatsThumbnail__container'>
 				{newItems.map(chat => {
-					const { user: userTarget, notSeen } = getTargetUser(chat.users);
+					const { user: userTarget, notSeen } = getTargetUser(chat.users, props.user);
 					const lastMsg = chat.messages[chat.messages.length - 1];
 
 					return (
