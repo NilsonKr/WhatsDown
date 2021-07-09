@@ -3,10 +3,10 @@
 	width: 100%;
 	min-height: 100vh;
 	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	align-items: center;
+	display: grid;
+	place-items: center;
+	gap: 20px;
+	overflow: hidden;
 }
 
 .bg__el {
@@ -38,11 +38,12 @@
 }
 
 .chat__view {
-	background-color: $white;
 	padding: 13px;
-	border-radius: 15px;
 	width: 95%;
+	max-width: 380px;
 	height: 480px;
+	background-color: $white;
+	border-radius: 15px;
 	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
