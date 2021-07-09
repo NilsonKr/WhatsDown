@@ -2,6 +2,7 @@
 	margin-top: 15px;
 	width: 100%;
 	overflow-y: scroll;
+	max-height: 65vh;
 }
 
 .chatsThumbnail__container::-webkit-scrollbar {
@@ -69,4 +70,10 @@
 	font-weight: bold;
 	color: $white;
 	background-color: $main-magenta;
+}
+
+@media screen and (min-height: 700px) {
+	.chatsThumbnail__container {
+		max-height: 75vh;
+	}
 }

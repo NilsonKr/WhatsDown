@@ -3,7 +3,7 @@
 	height: 90vh;
 	max-height: -webkit-fill-available;
 	display: grid;
-	grid-template-rows: 85px 1fr minmax(60px, 100px);
+	grid-template-rows: 85px 1fr 60px;
 	background: url('../../assets/ChatBg2.jpg') center / cover no-repeat;
 }
 .chat__header {
@@ -52,7 +52,7 @@
 .chat__main {
 	height: 100%;
 	width: 100%;
-	overflow-x: scroll;
+	overflow-y: scroll;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
@@ -73,6 +73,7 @@
 }
 
 .chat--msg p {
+	word-break: break-word;
 	color: $dark-text;
 	font-size: 0.9rem;
 }

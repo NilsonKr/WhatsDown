@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import gravatar from '../utils/gravatar';
 import { format } from 'date-fns';
 
 const ChatView = ({ userInfo, messages, loggedUser }) => {
+	const msgContainer = useRef();
+
+	useEffect(() => {
+		//Set Scroll pointing to the newest messages
+		msgContainer.current.scrollTop = msgContainer.current.scrollHeight;
+	}, []);
+
 	return (
 		<>
 			<div className='chat__header'>
@@ -16,21 +23,20 @@ const ChatView = ({ userInfo, messages, loggedUser }) => {
 				</div>
 				<h2>{userInfo.name}</h2>
 			</div>
-			<div className='chat__main'>
+			<div className='chat__main' ref={msgContainer}>
 				{messages.map(msg => {
 					const formatDate = format(new Date(msg.date), 'h:m a');
 
 					return (
-						<div key={msg._id} className={`chat--msg ${msg.user !== loggedUser && 'incoming'}`}>
+						<div
+							key={msg._id}
+							className={`chat--msg ${msg.user !== loggedUser && 'incoming'}`}
+						>
 							<p>{msg.message}</p>
 							<span className='chat--msg--date'>{formatDate}</span>
 						</div>
 					);
 				})}
-				{/* <div className='chat--msg incoming'>
-					<p>Hello , how are you doing ?! 😜</p>
-					<span className='chat--msg--date'>09:05 PM</span>
-				</div> */}
 			</div>
 		</>
 	);
