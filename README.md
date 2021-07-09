@@ -11,5 +11,5 @@ cd WhatsDown
 
 ## Run Project
 ```
-npm start
+npm run dev
 ```
