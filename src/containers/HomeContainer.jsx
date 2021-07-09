@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
-import { getChats, updateMessage, addChat } from '../actions/chats';
+import { getChats, updateMessage, addChat, updateNotSeen } from '../actions/chats';
 import useSearch from '../hooks/useSearch';
 import getTargetUser from '../utils/getTargetUserChats';
 import io from 'socket.io-client';
@@ -27,7 +27,8 @@ const HomeContainer = props => {
 				newSocket.emit('join chat', chat._id);
 				newSocket.on('chatmsg', msg => {
 					//Set new Msg and visibility Status
-					props.updateMessage(chat._id, msg, 1);
+					props.updateMessage(chat._id, msg);
+					props.updateNotSeen(chat._id, false);
 				});
 
 				currentConnections.set(chat._id, newSocket);
@@ -91,6 +92,7 @@ const mapStateToProps = ({ chats, user }) => ({
 const mapDispatchToProps = {
 	getChats,
 	updateMessage,
+	updateNotSeen,
 	addChat,
 };
 

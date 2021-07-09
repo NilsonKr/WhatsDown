@@ -51,6 +51,15 @@ function chatsRoutes(app) {
 		res.end();
 	});
 
+	router.put('/seen/:chatId', (req, res, next) => {
+		const { token } = req.cookies;
+
+		console.log(req.params.chatId);
+		console.log(req.body);
+
+		res.end();
+	});
+
 	router.post('/message', (req, res, next) => {
 		const { token } = req.cookies;
 

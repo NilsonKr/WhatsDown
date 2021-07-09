@@ -28,20 +28,40 @@ export const updateMessage = (id, msg, notSeenMsgs) => (dispatch, getState) => {
 	const chatIndex = chats.findIndex(chat => chat._id === id);
 	const newChat = { ...chats[chatIndex] };
 
-	if (msg) {
-		newChat.messages = [...chats[chatIndex].messages];
-		newChat.messages.push(msg);
+	newChat.messages = [...chats[chatIndex].messages];
+	newChat.messages.push(msg);
+
+	dispatch({ type: 'SET_CHATS_MESSAGES', payload: { newChat, index: chatIndex } });
+};
+
+export const updateNotSeen = (chatId, isReset) => (dispatch, getState) => {
+	const { chats, user } = getState();
+
+	//Find corresponding chat & user targets
+	const chatIndex = chats.findIndex(chat => chat._id === chatId);
+	const newChat = { ...chats[chatIndex] };
+
+	const userIndex = newChat.users.findIndex(userInfo => userInfo.user._id !== user.id);
+	const targetUser = newChat.users[userIndex];
+
+	//Set Pendents message
+	newChat.users[userIndex] = {
+		...targetUser,
+		notSeen: isReset ? 0 : targetUser.notSeen + 1,
+	};
+
+	if (isReset && targetUser.notSeen > 0) {
+		const users = [...newChat.users];
+		const usersToDb = users.map(userInfo => ({ ...userInfo, user: userInfo.user._id }));
+
+		axios.put(`/chats/seen/${newChat._id}`, usersToDb);
 	}
 
-	if (notSeenMsgs) {
-		const userIndex = newChat.users.findIndex(userInfo => userInfo.user._id !== user.id);
-		const targetUser = newChat.users[userIndex];
+	if (!isReset) {
+		const users = [...newChat.users];
+		const usersToDb = users.map(userInfo => ({ ...userInfo, user: userInfo.user._id }));
 
-		//Set Pendents message
-		newChat.users[userIndex] = {
-			...targetUser,
-			notSeen: notSeenMsgs === 'reset' ? 0 : targetUser.notSeen + notSeenMsgs,
-		};
+		axios.put(`/chats/seen/${newChat._id}`, usersToDb);
 	}
 
 	dispatch({ type: 'SET_CHATS_MESSAGES', payload: { newChat, index: chatIndex } });
