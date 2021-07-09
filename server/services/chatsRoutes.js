@@ -53,9 +53,14 @@ function chatsRoutes(app) {
 
 	router.put('/seen/:chatId', (req, res, next) => {
 		const { token } = req.cookies;
+		const { chatId } = req.params;
 
-		console.log(req.params.chatId);
-		console.log(req.body);
+		axios({
+			method: 'put',
+			url: `${config.apiUrl}/chats/${chatId}`,
+			headers: { Authorization: `Bearer ${token}` },
+			data: req.body,
+		});
 
 		res.end();
 	});

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { updateMessage, addChat, updateNotSeen } from '../actions/chats';
+import setNotSeen from '../utils/setNotSeenMsgs';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../context/connections';
@@ -62,6 +63,7 @@ const ChatContainer = props => {
 		socket.emit('private', newMsg);
 		props.updateMessage(chatId, newMsg);
 
+		setNotSeen(chat, props.user.id);
 		//Save message & update notSeen msgs
 		// axios.post('/chats/message', newMsg);
 	};
