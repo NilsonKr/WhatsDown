@@ -16,10 +16,15 @@
 	box-sizing: border-box;
 }
 
+html {
+	height: -webkit-fill-available;
+}
+
 body {
 	position: relative;
 	background-color: $soft-bg;
 	font-family: $main-font;
+	min-height: -webkit-fill-available;
 }
 
 .goBack {

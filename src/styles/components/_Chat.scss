@@ -1,6 +1,7 @@
 .chat__container {
 	width: 100%;
-	height: 100vh;
+	height: 90vh;
+	max-height: -webkit-fill-available;
 	display: grid;
 	grid-template-rows: 85px 1fr minmax(60px, 100px);
 	background: url('../../assets/ChatBg2.jpg') center / cover no-repeat;
@@ -93,4 +94,10 @@
 .chat__input {
 	width: 100%;
 	height: 100%;
+}
+
+@media screen and (min-height: 800px) {
+	.chat__container {
+		height: 100vh;
+	}
 }
