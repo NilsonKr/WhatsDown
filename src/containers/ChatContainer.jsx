@@ -62,8 +62,12 @@ const ChatContainer = props => {
 			date: new Date(),
 			user: props.user.id,
 		};
+		//update messages in UI
 		socket.emit('private', newMsg);
 		props.updateMessage(chatId, newMsg);
+
+		//Save messaaage
+		axios.post('/chats/message', newMsg);
 	};
 
 	//Create New chat call

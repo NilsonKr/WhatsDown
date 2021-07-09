@@ -50,6 +50,19 @@ function chatsRoutes(app) {
 
 		res.end();
 	});
+
+	router.post('/message', (req, res, next) => {
+		const { token } = req.cookies;
+
+		axios({
+			method: 'post',
+			url: `${config.apiUrl}/messages`,
+			headers: { Authorization: `Bearer ${token}` },
+			data: req.body,
+		});
+
+		res.end();
+	});
 }
 
 module.exports = chatsRoutes;
