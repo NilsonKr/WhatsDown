@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 require('dotenv').config();
 
@@ -48,9 +49,34 @@ module.exports = {
 		}),
 		new WebpackManifestPlugin(),
 		new CleanWebpackPlugin(),
+		new BundleAnalyzerPlugin(),
 	],
 	optimization: {
 		minimize: true,
 		minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+		splitChunks: {
+			chunks: 'all',
+			cacheGroups: {
+				default: false,
+				commons: {
+					chunks: 'all',
+					test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+					name: 'commons',
+					filename: 'statics/commons.[contenthash].js',
+					priority: 20,
+					enforce: true,
+					reuseExistingChunk: true,
+				},
+				vendors: {
+					chunks: 'all',
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendors',
+					filename: 'statics/vendors.[contenthash].js',
+					priority: 10,
+					enforce: true,
+					reuseExistingChunk: true,
+				},
+			},
+		},
 	},
 };

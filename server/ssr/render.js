@@ -17,6 +17,8 @@ import reducers from '../../src/reducers/combineReducers';
 const genHtml = (app, preloadedState, manifest) => {
 	const mainJs = manifest ? manifest['main.js'] : '"/statics/main.js"';
 	const mainCss = manifest ? manifest['main.css'] : '"/statics/main.css"';
+	const vendors = manifest ? manifest['vendors.js'] : '';
+	const commons = manifest ? manifest['commons.js'] : '';
 
 	return `
     <!DOCTYPE html>
@@ -44,6 +46,8 @@ const genHtml = (app, preloadedState, manifest) => {
 						'\\u003c'
 					)}
         </script>
+        <script src=${vendors}></script>
+        <script src=${commons}></script>
         <script src=${mainJs}></script>
       </body>
     </html>
