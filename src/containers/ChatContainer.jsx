@@ -63,9 +63,9 @@ const ChatContainer = props => {
 		socket.emit('private', newMsg);
 		props.updateMessage(chatId, newMsg);
 
-		setNotSeen(chat, props.user.id);
 		//Save message & update notSeen msgs
-		// axios.post('/chats/message', newMsg);
+		axios.post('/chats/message', newMsg);
+		setNotSeen(chat, props.user.id);
 	};
 
 	//Create New chat call

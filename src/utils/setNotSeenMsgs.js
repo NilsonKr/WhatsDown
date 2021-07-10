@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const setNotSeen = (chat, userId) => {
+	//Find chat & transmitter user
 	const newChat = { ...chat };
 	const userIndex = newChat.users.findIndex(userInfo => userInfo.user._id === userId);
 	const loggedUser = newChat.users[userIndex];
@@ -10,6 +11,7 @@ const setNotSeen = (chat, userId) => {
 		notSeen: loggedUser.notSeen + 1,
 	};
 
+	//Assembling data in order to send to db
 	const users = [...newChat.users];
 	const usersToDb = users.map(userInfo => ({ ...userInfo, user: userInfo.user._id }));
 

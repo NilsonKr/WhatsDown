@@ -22,8 +22,8 @@ export const getChats = () => (dispatch, getState) => {
 		.catch(err => console.log(err));
 };
 
-export const updateMessage = (id, msg, notSeenMsgs) => (dispatch, getState) => {
-	const { chats, user } = getState();
+export const updateMessage = (id, msg) => (dispatch, getState) => {
+	const { chats } = getState();
 	//Inmutability & updating messages
 	const chatIndex = chats.findIndex(chat => chat._id === id);
 	const newChat = { ...chats[chatIndex] };
