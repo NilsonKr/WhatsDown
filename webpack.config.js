@@ -2,6 +2,9 @@ const path = require('path');
 const { HotModuleReplacementPlugin } = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DotenvPlugin = require('dotenv-webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 require('dotenv').config();
 
@@ -10,17 +13,14 @@ require('dotenv').config();
 */
 
 module.exports = {
-	entry: [
-		'react-hot-loader/patch',
-		'./src/index.js',
-		'webpack-hot-middleware/client?path=http://localhost:8000/__webpack_hmr',
-	],
+	entry: './src/index.js',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'statics/main.js',
 		publicPath: '/',
+		assetModuleFilename: '../assets/[name].[ext]',
 	},
-	mode: 'development',
+	mode: 'production',
 	resolve: {
 		extensions: ['.js', '.jsx'],
 	},
@@ -33,19 +33,23 @@ module.exports = {
 			},
 			{
 				test: /\.(css|s[ac]ss)$/i,
-				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+				use: [{ loader: MiniCssExtractPlugin.loader }, 'css-loader', 'sass-loader'],
 			},
 			{
-				test: /\.jpg/,
+				test: /\.(jpg|svg|png)$/i,
 				type: 'asset/resource',
 			},
 		],
 	},
 	plugins: [
 		new DotenvPlugin(),
-		new HotModuleReplacementPlugin(),
 		new MiniCssExtractPlugin({
 			filename: 'statics/main.css',
 		}),
+		new CleanWebpackPlugin(),
 	],
+	optimization: {
+		minimize: true,
+		minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+	},
 };

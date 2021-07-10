@@ -26,6 +26,10 @@ if (config.env === 'development') {
 
 	app.use(devMiddleware(compiler, { serverSideRender: true }));
 	app.use(hotMiddleware(compiler));
+} else {
+	app.use('*/statics', express.static(path.join(__dirname, '../dist/statics')));
+
+	app.disable('x-powered-by');
 }
 
 authRoutes(app);
