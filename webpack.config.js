@@ -1,8 +1,8 @@
 const path = require('path');
-const { HotModuleReplacementPlugin } = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DotenvPlugin = require('dotenv-webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
@@ -16,7 +16,7 @@ module.exports = {
 	entry: './src/index.js',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'statics/main.js',
+		filename: 'statics/main.[contenthash].js',
 		publicPath: '/',
 		assetModuleFilename: '../assets/[name].[ext]',
 	},
@@ -44,8 +44,9 @@ module.exports = {
 	plugins: [
 		new DotenvPlugin(),
 		new MiniCssExtractPlugin({
-			filename: 'statics/main.css',
+			filename: 'statics/main.[contenthash].css',
 		}),
+		new WebpackManifestPlugin(),
 		new CleanWebpackPlugin(),
 	],
 	optimization: {

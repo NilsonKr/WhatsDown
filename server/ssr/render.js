@@ -14,7 +14,10 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from '../../src/reducers/combineReducers';
 
-const genHtml = (app, preloadedState) => {
+const genHtml = (app, preloadedState, manifest) => {
+	const mainJs = manifest ? manifest['main.js'] : '"/statics/main.js"';
+	const mainCss = manifest ? manifest['main.css'] : '"/statics/main.css"';
+
 	return `
     <!DOCTYPE html>
     <html lang="en">
@@ -23,7 +26,7 @@ const genHtml = (app, preloadedState) => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
-        <link rel="stylesheet" href="/statics/main.css" />
+        <link rel="stylesheet" href=${mainCss} />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -41,7 +44,7 @@ const genHtml = (app, preloadedState) => {
 						'\\u003c'
 					)}
         </script>
-        <script src="/statics/main.js"></script>
+        <script src=${mainJs}></script>
       </body>
     </html>
   `;
@@ -95,7 +98,7 @@ const render = async (req, res, next) => {
 		</Provider>
 	);
 
-	res.send(genHtml(appHtml, preloadedState));
+	res.send(genHtml(appHtml, preloadedState, req.staticManifest));
 };
 
 module.exports = render;

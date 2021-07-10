@@ -1,8 +1,11 @@
 const express = require('express');
+const helmet = require('helmet');
 const config = require('./config/index');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const getManifest = require('./utils/getManifest');
 const render = require('./ssr/render');
+
 const app = express();
 
 //Auth Routes
@@ -28,6 +31,22 @@ if (config.env === 'development') {
 	app.use(hotMiddleware(compiler));
 } else {
 	app.use('*/statics', express.static(path.join(__dirname, '../dist/statics')));
+
+	//Get hashed static files
+	app.use((req, res, next) => {
+		if (!req.staticManifest) {
+			req.staticManifest = getManifest();
+		}
+
+		next();
+	});
+
+	//Security
+	app.use(
+		helmet({
+			contentSecurityPolicy: false,
+		})
+	);
 
 	app.disable('x-powered-by');
 }
