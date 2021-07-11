@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getChats, updateMessage, addChat, updateNotSeen } from '../actions/chats';
 import useSearch from '../hooks/useSearch';
@@ -80,6 +81,16 @@ const HomeContainer = props => {
 						/>
 					);
 				})}
+				{!props.dataState.loading && newItems.length === 0 ? (
+					<div className='empty_chats'>
+						<img src='/assets/empty.svg' alt='Empty Inbox' width='60px' />
+						<h2>
+							You dont have any Chats yet <Link to='/find'>Find People</Link>
+						</h2>
+					</div>
+				) : (
+					''
+				)}
 			</section>
 			{props.dataState.loading && <Loader />}
 			{props.dataState.error && <Error message={props.dataState.error} />}

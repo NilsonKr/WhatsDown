@@ -64,7 +64,6 @@ export const updateNotSeen = (chatId, isReset) => (dispatch, getState) => {
 		const users = [...newChat.users];
 		const usersToDb = users.map(userInfo => ({ ...userInfo, user: userInfo.user._id }));
 
-		console.log('UPDATE');
 		axios.put(`/chats/seen/${newChat._id}`, usersToDb);
 	}
 

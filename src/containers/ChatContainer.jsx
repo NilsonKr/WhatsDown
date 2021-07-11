@@ -58,7 +58,7 @@ const ChatContainer = props => {
 			);
 
 			if (findTargetUser.notSeen > 0) {
-				props.updateNotSeen(chatId, true);
+				setTimeout(() => props.updateNotSeen(chatId, true), 1000);
 			}
 		}
 	}, [chat]);
