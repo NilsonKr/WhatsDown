@@ -5,7 +5,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 require('dotenv').config();
 
@@ -49,7 +48,6 @@ module.exports = {
 		}),
 		new WebpackManifestPlugin(),
 		new CleanWebpackPlugin(),
-		new BundleAnalyzerPlugin(),
 	],
 	optimization: {
 		minimize: true,
