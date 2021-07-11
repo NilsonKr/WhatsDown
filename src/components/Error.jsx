@@ -2,7 +2,7 @@ import React from 'react';
 
 const Error = ({ message }) => {
 	return (
-		<div className='state_container'>
+		<div className='state_container error_warning'>
 			<img src='/assets/warning.svg' alt='Error' width='80px' />
 			<h2>{message}</h2>
 		</div>

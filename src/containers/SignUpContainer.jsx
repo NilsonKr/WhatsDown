@@ -19,7 +19,13 @@ const SignUpContainer = props => {
 
 	return (
 		<>
-			<AuthView view='signup' submitAction={handleSignUp} fillForm={handleInputs} />
+			<AuthView
+				view='signup'
+				submitAction={handleSignUp}
+				fillForm={handleInputs}
+				isLoading={props.dataState.loading}
+				isError={props.dataState.error}
+			/>
 		</>
 	);
 };
@@ -28,4 +34,6 @@ const mapDispatchToProps = {
 	signup,
 };
 
-export default connect(null, mapDispatchToProps)(SignUpContainer);
+const mapStateToProps = ({ dataState }) => ({ dataState });
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpContainer);

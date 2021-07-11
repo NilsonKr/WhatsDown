@@ -31,6 +31,8 @@ const LogInContainer = props => {
 				isRemember={isRemember}
 				rememberPick={setRemember}
 				googleAuth={authWithGoogle}
+				isLoading={props.dataState.loading}
+				isError={props.dataState.error}
 			/>
 		</>
 	);
@@ -39,5 +41,6 @@ const LogInContainer = props => {
 const mapDispatchToProps = {
 	login,
 };
+const mapStateToProps = ({ dataState }) => ({ dataState });
 
-export default connect(null, mapDispatchToProps)(LogInContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LogInContainer);

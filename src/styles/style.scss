@@ -40,4 +40,12 @@ body {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	align-items: center;
+}
+
+.error_warning {
+	margin: 20px 0;
+	flex-direction: column;
+	text-align: center;
+	color: $warning-color;
 }

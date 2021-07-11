@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Loader from './Loader';
+import Error from './Error';
+
 const AuthView = ({
 	view,
 	submitAction,
@@ -8,6 +11,8 @@ const AuthView = ({
 	fillForm,
 	rememberPick,
 	isRemember,
+	isLoading,
+	isError,
 }) => {
 	const isLogin = view === 'login';
 
@@ -69,6 +74,9 @@ const AuthView = ({
 							</p>
 						)}
 					</div>
+					{/* Setting loader or error Warning */}
+					{isLoading && <Loader />}
+					{isError && <Error message={isError} />}
 					<button className='auth--enter' onClick={submitAction}>
 						{isLogin ? 'Log In' : 'Create an Account'}
 					</button>
