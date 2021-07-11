@@ -26,14 +26,10 @@ const HomeContainer = props => {
 			if (!connections.has(chat._id)) {
 				const newSocket = io(process.env.SOCKET_URL);
 
-				console.log('socket url', process.env.SOCKET_URL);
-				console.log(newSocket);
-
 				newSocket.on('message', message => console.log(message));
 				newSocket.emit('join chat', chat._id);
 				newSocket.on('chatmsg', msg => {
 					//Set new Msg and visibility Status
-					console.log('SOCKET MESSAGE');
 					props.updateMessage(chat._id, msg);
 					props.updateNotSeen(chat._id, false);
 				});
