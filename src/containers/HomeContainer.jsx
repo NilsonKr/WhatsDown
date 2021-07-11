@@ -30,7 +30,6 @@ const HomeContainer = props => {
 				newSocket.emit('join chat', chat._id);
 				newSocket.on('chatmsg', msg => {
 					//Set new Msg and visibility Status
-					console.log('SOCKET MESSAGE');
 					props.updateMessage(chat._id, msg);
 					props.updateNotSeen(chat._id, false);
 				});
