@@ -44,6 +44,14 @@ const ProfileContainer = props => {
 				updateEmoji={setEmoji}
 				updateInfo={handleUpdateInfo}
 			/>
+			<div className='info_upload'>
+				<img src='/assets/warning.svg' alt=' upload image information' width='30px' />
+				<p>
+					The image upload will be available in future releases, Meanwhile you can use{' '}
+					<a href='https://es.gravatar.com/'>Gravatar</a> to customize your profile
+					picture
+				</p>
+			</div>
 		</section>
 	);
 };
