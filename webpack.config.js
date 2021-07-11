@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const DotenvPlugin = require('dotenv-webpack');
+// const DotenvPlugin = require('dotenv-webpack');
+const { EnvironmentPlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -9,6 +10,8 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 /**
   @type {import('webpack').Configuration} 
 */
+
+require('dotenv').config();
 
 module.exports = {
 	entry: './src/index.js',
@@ -40,7 +43,7 @@ module.exports = {
 		],
 	},
 	plugins: [
-		new DotenvPlugin(),
+		new EnvironmentPlugin(['SOCKET_URL']),
 		new MiniCssExtractPlugin({
 			filename: 'statics/main.[contenthash].css',
 		}),
