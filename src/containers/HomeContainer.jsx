@@ -6,6 +6,8 @@ import getTargetUser from '../utils/getTargetUserChats';
 import io from 'socket.io-client';
 import { Context } from '../context/connections';
 
+import Loader from '../components/Loader';
+import Error from '../components/Error';
 import HomeHeader from '../components/HomeHeader';
 import FilterChats from '../components/FilterChats';
 import ChatThumbnail from '../components/ChatThumbnail';
@@ -79,6 +81,7 @@ const HomeContainer = props => {
 					);
 				})}
 			</section>
+
 			<HomeFooter />
 		</main>
 	);

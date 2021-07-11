@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import FilterChats from './FilterChats';
-
 const HomeHeader = props => {
 	return (
 		<div className='home'>
