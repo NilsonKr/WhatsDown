@@ -1,11 +1,10 @@
+import dataState from './dataState';
 import axios from 'axios';
 
 export const updateInfo = info => dispatch => {
 	axios
 		.put('/user/update', info.updated)
-		.then(({ data }) => {
-			console.log(data);
-
+		.then(() => {
 			dispatch({
 				type: 'UPDATE_INFO',
 				payload: info.user,
@@ -15,12 +14,20 @@ export const updateInfo = info => dispatch => {
 };
 
 export const getFindUsers = () => dispatch => {
+	dispatch({ type: dataState.load, payload: true });
+
 	axios
 		.get('/user')
 		.then(({ data }) => {
+			dispatch({ type: dataState.load, payload: false });
 			dispatch({ type: 'SET_FIND_USERS', payload: data });
 		})
-		.catch(err => console.log(err));
+		.catch(err =>
+			dispatch({
+				type: dataState.error,
+				payload: 'Internal Error, Refresh the Page or Try later :(',
+			})
+		);
 	//
 };
 

@@ -6,6 +6,8 @@ import axios from 'axios';
 import { getFindUsers } from '../actions/user';
 import { getChats } from '../actions/chats';
 
+import Loader from '../components/Loader';
+import Error from '../components/Error';
 import SearchBar from '../components/FilterChats';
 import ChatThumbnail from '../components/ChatThumbnail';
 
@@ -73,11 +75,18 @@ const FindContainer = props => {
 						}
 					})}
 			</section>
+			{props.dataState.loading && <Loader />}
+			{props.dataState.error && <Error message={props.dataState.error} />}
 		</section>
 	);
 };
 
-const mapStateToProps = ({ findUsers, usersRelated, chats }) => ({ findUsers, usersRelated, chats });
+const mapStateToProps = ({ findUsers, usersRelated, chats, dataState }) => ({
+	findUsers,
+	usersRelated,
+	chats,
+	dataState,
+});
 const mapDispatchToProps = {
 	getFindUsers,
 	getChats,

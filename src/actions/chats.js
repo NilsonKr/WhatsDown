@@ -1,3 +1,4 @@
+import dataState from './dataState';
 import axios from 'axios';
 import getRelatedUsers from '../utils/getRelatedUsers';
 
@@ -11,15 +12,23 @@ export const getChats = () => (dispatch, getState) => {
 		user: { id: userId },
 	} = getState();
 
+	dispatch({ type: dataState.load, payload: true });
+
 	axios
-		.get('/chats/single')
+		.get('/chats/singLe')
 		.then(({ data }) => {
 			const relatedUsers = getRelatedUsers(data, userId);
 			// //Set users who has a chat with logged user
+			dispatch({ type: dataState.load, payload: false });
 			dispatch({ type: 'SET_CHATS', payload: data });
 			dispatch({ type: 'SET_RELATED_USERS', payload: [...relatedUsers, userId] });
 		})
-		.catch(err => console.log(err));
+		.catch(() =>
+			dispatch({
+				type: dataState.error,
+				payload: 'Internal Error, Refresh the Page or Try later :(',
+			})
+		);
 };
 
 export const updateMessage = (id, msg) => (dispatch, getState) => {

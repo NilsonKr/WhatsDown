@@ -81,15 +81,17 @@ const HomeContainer = props => {
 					);
 				})}
 			</section>
-
+			{props.dataState.loading && <Loader />}
+			{props.dataState.error && <Error message={props.dataState.error} />}
 			<HomeFooter />
 		</main>
 	);
 };
 
-const mapStateToProps = ({ chats, user }) => ({
+const mapStateToProps = ({ chats, user, dataState }) => ({
 	user,
 	chats,
+	dataState,
 });
 
 const mapDispatchToProps = {
