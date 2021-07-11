@@ -17,6 +17,7 @@ import reducers from '../../src/reducers/combineReducers';
 const genHtml = (app, preloadedState, manifest) => {
 	const mainJs = manifest ? manifest['main.js'] : '"/statics/main.js"';
 	const mainCss = manifest ? manifest['main.css'] : '"/statics/main.css"';
+	const vendorsCss = manifest ? manifest['vendors.css'] : '';
 	const vendors = manifest ? manifest['vendors.js'] : '';
 	const commons = manifest ? manifest['commons.js'] : '';
 
@@ -28,7 +29,8 @@ const genHtml = (app, preloadedState, manifest) => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
-        <link rel="stylesheet" href=${mainCss} />
+        <link rel="stylesheet" href=${vendorsCss} />
+				<link rel="stylesheet" href=${mainCss} />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
