@@ -7,6 +7,8 @@ import ReduxThunk from 'redux-thunk';
 import reducers from './reducers/combineReducers.js';
 import ConnectionsProvider from './context/connections';
 
+require('dotenv').config();
+
 import App from './App';
 
 import './styles/style.scss';

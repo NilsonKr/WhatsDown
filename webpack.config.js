@@ -6,8 +6,6 @@ const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-require('dotenv').config();
-
 /**
   @type {import('webpack').Configuration} 
 */

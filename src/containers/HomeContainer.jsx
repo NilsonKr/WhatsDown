@@ -26,7 +26,7 @@ const HomeContainer = props => {
 			if (!connections.has(chat._id)) {
 				const newSocket = io(process.env.SOCKET_URL);
 
-				console.log(process.env.SOCKET_URL);
+				console.log('socket url', process.env.SOCKET_URL);
 				console.log(newSocket);
 
 				newSocket.on('message', message => console.log(message));
