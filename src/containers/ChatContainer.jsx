@@ -50,6 +50,19 @@ const ChatContainer = props => {
 		setChat(findChat);
 	}, [props.chats]);
 
+	//Update Incoming Message to Seen
+	useEffect(() => {
+		if (chat) {
+			const findTargetUser = chat.users.find(
+				userInfo => userInfo.user._id === targeUserId
+			);
+
+			if (findTargetUser.notSeen > 0) {
+				props.updateNotSeen(chatId, true);
+			}
+		}
+	}, [chat]);
+
 	//Send Messsage Through Sockets
 	const sendMessage = message => {
 		const newMsg = {
