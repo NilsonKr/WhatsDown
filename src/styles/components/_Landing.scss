@@ -37,6 +37,13 @@
 	border-top-right-radius: 50%;
 }
 
+.landing__content {
+	width: clamp(320px, 100%, 600px);
+	display: grid;
+	justify-items: center;
+	row-gap: 30px;
+}
+
 .chat__view {
 	padding: 13px;
 	width: 95%;
@@ -84,4 +91,22 @@
 	text-decoration: none;
 	font-size: 1rem;
 	color: $main-magenta;
+}
+
+@media screen and (min-width: 1024px) {
+	.bg__el {
+		width: 600px;
+		height: 600px;
+	}
+
+	.bg--left {
+		left: 0;
+		top: -10%;
+		transform: rotate(-90deg);
+	}
+	.bg--right {
+		right: 0;
+		bottom: -10%;
+		transform: rotate(-90deg);
+	}
 }
